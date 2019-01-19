@@ -8,7 +8,7 @@ We would like to acknowledge [Xiaoqi Yin](https://www.linkedin.com/in/xiaoqi-yin
 We modified the AbrController.js to include our rate adaptation scheme (FastScan).  
 The implementation can be found in [dash_player/app/js/streaming/algo/bfAlgo.js](dash_player/app/js/streaming/algo/bfAlgo.js).
 
-For technical details, see our paper ["FastScan: Robust Low-Complexity Rate Adaptation Algorithm for Video Streaming over HTTP"](https://arxiv.org/abs/1806.02803), which can be cited as follows:
+For details, refer to our paper ["FastScan: Robust Low-Complexity Rate Adaptation Algorithm for Video Streaming over HTTP"](https://arxiv.org/abs/1806.02803), which can be cited as follows:
 ```
 @article{elgabli2018fastscan,
   title={FastScan: Robust Low-Complexity Rate Adaptation Algorithm for Video Streaming over HTTP},
