@@ -5,7 +5,7 @@ Note that you need to run bandwidth shaping to shape the bandwidth according to 
 
 We would like to acknowledge [Xiaoqi Yin](https://www.linkedin.com/in/xiaoqi-yin-77393427/) who provided us with the base code that includes dash.js, their proposed rate adaptation scheme described in their paper ["A Control-Theoretic Approach for Dynamic Adaptive Video Streaming over HTTP"](https://dl.acm.org/citation.cfm?id=2787486), and other rate adaptation schemes.
 
-We modified the AbrController.js to include our rate adaptation scheme (FastScan).
+We modified the AbrController.js to include our rate adaptation scheme (FastScan).  
 The implementation can be found in [dash_player/app/js/streaming/algo/bfAlgo.js](dash_player/app/js/streaming/algo/bfAlgo.js).
 
 For technical details, refer to our paper ["FastScan: Robust Low-Complexity Rate Adaptation Algorithm for Video Streaming over HTTP"](https://arxiv.org/abs/1806.02803), which can be cited as follows:
