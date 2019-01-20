@@ -1,0 +1,2848 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for dash/DashManifestExtensions.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">dash/DashManifestExtensions.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">39.71% <small>(135 / 340)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">31.71% <small>(65 / 205)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">66.67% <small>(30 / 45)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">39.71% <small>(135 / 340)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">dash/</a> &#187; DashManifestExtensions.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">182</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">12</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * The copyright in this software is being made available under the BSD License, included below. This software may be subject to other third party and contributor rights, including patent rights, and no such rights are granted under this license.
+ *
+ * Copyright (c) 2013, Digital Primates
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * •  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * •  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ * •  Neither the name of the Digital Primates nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+&nbsp;
+&nbsp;
+Dash.dependencies.DashManifestExtensions = function () {
+    "use strict";
+    this.timelineConverter = undefined;
+};
+&nbsp;
+Dash.dependencies.DashManifestExtensions.prototype = {
+    constructor: Dash.dependencies.DashManifestExtensions,
+&nbsp;
+    getIsAudio: function (adaptation) {
+        "use strict";
+        var i,
+            len,
+            col = adaptation.ContentComponent_asArray,
+            representation,
+            result = false,
+            found = false;
+&nbsp;
+        if (col) {
+            for (i = 0, len = col.length; i &lt; len; i += 1) {
+                if (col[i].contentType === "audio") {
+                    result = true;
+                    found = true;
+                }
+            }
+        }
+&nbsp;
+        if (adaptation.hasOwnProperty("mimeType")) {
+            result = adaptation.mimeType.indexOf("audio") !== -1;
+            found = true;
+        }
+&nbsp;
+        // couldn't find on adaptationset, so check a representation
+        if (!found) {
+            i = 0;
+            len = adaptation.Representation_asArray.length;
+            while (!found &amp;&amp; i &lt; len) {
+                representation = adaptation.Representation_asArray[i];
+&nbsp;
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (representation.hasOwnProperty("mimeType")) {
+                    result = representation.mimeType.indexOf("audio") !== -1;
+                    found = true;
+                }
+&nbsp;
+                i += 1;
+            }
+        }
+&nbsp;
+        // TODO : Add the type here so that somebody who has access to the adapatation set can check it.
+        // THIS IS A HACK for a bug in DashMetricsExtensions.
+        // See the note in DashMetricsExtensions.adaptationIsType().
+        if (result) {
+            adaptation.type = "audio";
+        }
+&nbsp;
+        return Q.when(result);
+    },
+&nbsp;
+    getIsVideo: function (adaptation) {
+        "use strict";
+        var i,
+            len,
+            col = adaptation.ContentComponent_asArray,
+            representation,
+            result = false,
+            found = false;
+&nbsp;
+        if (col) {
+            for (i = 0, len = col.length; i &lt; len; i += 1) {
+                if (col[i].contentType === "video") {
+                    result = true;
+                    found = true;
+                }
+            }
+        }
+&nbsp;
+        if (adaptation.hasOwnProperty("mimeType")) {
+            result = adaptation.mimeType.indexOf("video") !== -1;
+            found = true;
+        }
+&nbsp;
+        // couldn't find on adaptationset, so check a representation
+        if (!found) {
+            i = 0;
+            len = adaptation.Representation_asArray.length;
+            while (!found &amp;&amp; i &lt; len) {
+                representation = adaptation.Representation_asArray[i];
+&nbsp;
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (representation.hasOwnProperty("mimeType")) {
+                    result = representation.mimeType.indexOf("video") !== -1;
+                    found = true;
+                }
+&nbsp;
+                i += 1;
+            }
+        }
+&nbsp;
+        // TODO : Add the type here so that somebody who has access to the adapatation set can check it.
+        // THIS IS A HACK for a bug in DashMetricsExtensions.
+        // See the note in DashMetricsExtensions.adaptationIsType().
+        if (result) {
+            adaptation.type = "video";
+        }
+&nbsp;
+        return Q.when(result);
+    },
+&nbsp;
+    getIsText: function (adaptation) {
+        "use strict";
+        var i,
+            len,
+            col = adaptation.ContentComponent_asArray,
+            representation,
+            result = false,
+            found = false;
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (col) {
+            for (i = 0, len = col.length; i &lt; len; i += 1) {
+                <span class="missing-if-branch" title="else path not taken" >E</span>if (col[i].contentType === "text") {
+                    result = true;
+                    found = true;
+                }
+            }
+        }
+&nbsp;
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (adaptation.hasOwnProperty("mimeType")) {
+<span class="cstat-no" title="statement not covered" >            result = (adaptation.mimeType.indexOf("vtt") !== -1) || (adaptation.mimeType.indexOf("ttml") !== -1);</span>
+<span class="cstat-no" title="statement not covered" >            found = true;</span>
+        }
+&nbsp;
+        // couldn't find on adaptationset, so check a representation
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!found) {
+<span class="cstat-no" title="statement not covered" >            i = 0;</span>
+<span class="cstat-no" title="statement not covered" >            len = adaptation.Representation_asArray.length;</span>
+<span class="cstat-no" title="statement not covered" >            while (!found &amp;&amp; i &lt; len) {</span>
+<span class="cstat-no" title="statement not covered" >                representation = adaptation.Representation_asArray[i];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (representation.hasOwnProperty("mimeType")) {</span>
+<span class="cstat-no" title="statement not covered" >                    result = (representation.mimeType.indexOf("vtt") !== -1) || (representation.mimeType.indexOf("ttml") !== -1);</span>
+<span class="cstat-no" title="statement not covered" >                    found = true;</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                i += 1;</span>
+            }
+        }
+&nbsp;
+        return Q.when(result);
+    },
+&nbsp;
+    getIsTextTrack: function(type) {
+        return (type === "text/vtt" || type === "application/ttml+xml");
+    },
+&nbsp;
+    getIsMain: function (/*adaptation*/) {
+        "use strict";
+        // TODO : Check "Role" node.
+        // TODO : Use this somewhere.
+        return Q.when(false);
+    },
+&nbsp;
+    processAdaptation: function (adaptation) {
+        "use strict";
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (adaptation.Representation_asArray !== undefined &amp;&amp; adaptation.Representation_asArray !== null) {
+            adaptation.Representation_asArray.sort(function(a, b) {
+                return a.bandwidth - b.bandwidth;
+            });
+        }
+&nbsp;
+        return adaptation;
+    },
+&nbsp;
+    getDataForId: function (id, manifest, periodIndex) {
+        "use strict";
+        var adaptations = manifest.Period_asArray[periodIndex].AdaptationSet_asArray,
+            i,
+            len;
+&nbsp;
+        for (i = 0, len = adaptations.length; i &lt; len; i += 1) {
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (adaptations[i].hasOwnProperty("id") &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >adaptations[i].id === id)</span> {
+<span class="cstat-no" title="statement not covered" >                return Q.when(adaptations[i]);</span>
+            }
+        }
+&nbsp;
+        return Q.when(null);
+    },
+&nbsp;
+    getDataForIndex: function (index, manifest, periodIndex) {
+        "use strict";
+        var adaptations = manifest.Period_asArray[periodIndex].AdaptationSet_asArray;
+&nbsp;
+        return Q.when(adaptations[index]);
+    },
+&nbsp;
+    getDataIndex: function (data, manifest, periodIndex) {
+        "use strict";
+&nbsp;
+        var adaptations = manifest.Period_asArray[periodIndex].AdaptationSet_asArray,
+            i,
+            len;
+&nbsp;
+        for (i = 0, len = adaptations.length; i &lt; len; i += 1) {
+            if (adaptations[i] === data) {
+                return Q.when(i);
+            }
+        }
+&nbsp;
+        return Q.when(-1);
+    },
+&nbsp;
+    getVideoData: function (manifest, periodIndex) {
+        "use strict";
+        //return Q.when(null);
+        //------------------------------------
+        var adaptations = manifest.Period_asArray[periodIndex].AdaptationSet_asArray,
+            i,
+            len,
+            deferred = Q.defer(),
+            funcs = [];
+&nbsp;
+        for (i = 0, len = adaptations.length; i &lt; len; i += 1) {
+            funcs.push(this.getIsVideo(adaptations[i]));
+        }
+        Q.all(funcs).then(
+            function (results) {
+                var found = false;
+                for (i = 0, len = results.length; i &lt; len; i += 1) {
+                    if (results[i] === true) {
+                        found = true;
+                        deferred.resolve(adaptations[i]);
+                    }
+                }
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (!found) {
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve(null);</span>
+                }
+            }
+        );
+&nbsp;
+        return deferred.promise;
+    },
+&nbsp;
+    getTextData: <span class="fstat-no" title="function not covered" >function (manifest, periodIndex) {</span>
+        "use strict";
+        //return Q.when(null);
+        //------------------------------------
+<span class="cstat-no" title="statement not covered" >        var adaptations = manifest.Period_asArray[periodIndex].AdaptationSet_asArray,</span>
+            i,
+            len,
+            deferred = Q.defer(),
+            funcs = [];
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (i = 0, len = adaptations.length; i &lt; len; i += 1) {</span>
+<span class="cstat-no" title="statement not covered" >            funcs.push(this.getIsText(adaptations[i]));</span>
+        }
+<span class="cstat-no" title="statement not covered" >        Q.all(funcs).then(</span>
+<span class="fstat-no" title="function not covered" >            function (results) {</span>
+<span class="cstat-no" title="statement not covered" >                var found = false;</span>
+<span class="cstat-no" title="statement not covered" >                for (i = 0, len = results.length; i &lt; len &amp;&amp; !found; i += 1) {</span>
+<span class="cstat-no" title="statement not covered" >                    if (results[i] === true) {</span>
+<span class="cstat-no" title="statement not covered" >                        found = true;</span>
+<span class="cstat-no" title="statement not covered" >                        deferred.resolve(adaptations[i]);</span>
+                    }
+                }
+<span class="cstat-no" title="statement not covered" >                if (!found) {</span>
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve(null);</span>
+                }
+            }
+        );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return deferred.promise;</span>
+    },
+&nbsp;
+    getAudioDatas: function (manifest, periodIndex) {
+        "use strict";
+        //return Q.when(null);
+        //------------------------------------
+        var adaptations = manifest.Period_asArray[periodIndex].AdaptationSet_asArray,
+            i,
+            len,
+            deferred = Q.defer(),
+            funcs = [];
+&nbsp;
+        for (i = 0, len = adaptations.length; i &lt; len; i += 1) {
+            funcs.push(this.getIsAudio(adaptations[i]));
+        }
+&nbsp;
+        Q.all(funcs).then(
+            function (results) {
+                var datas = [];
+                for (i = 0, len = results.length; i &lt; len; i += 1) {
+                    if (results[i] === true) {
+                        datas.push(adaptations[i]);
+                    }
+                }
+                deferred.resolve(datas);
+            }
+        );
+&nbsp;
+        return deferred.promise;
+    },
+&nbsp;
+    getPrimaryAudioData: function (manifest, periodIndex) {
+        "use strict";
+        var i,
+            len,
+            deferred = Q.defer(),
+            funcs = [],
+            self = this;
+&nbsp;
+        this.getAudioDatas(manifest, periodIndex).then(
+            function (datas) {
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (!datas || datas.length === 0) {
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve(null);</span>
+                }
+&nbsp;
+                for (i = 0, len = datas.length; i &lt; len; i += 1) {
+                    funcs.push(self.getIsMain(datas[i]));
+                }
+&nbsp;
+                Q.all(funcs).then(
+                    function (results) {
+                        var found = false;
+                        for (i = 0, len = results.length; i &lt; len; i += 1) {
+                            <span class="missing-if-branch" title="if path not taken" >I</span>if (results[i] === true) {
+<span class="cstat-no" title="statement not covered" >                                found = true;</span>
+<span class="cstat-no" title="statement not covered" >                                deferred.resolve(self.processAdaptation(datas[i]));</span>
+                            }
+                        }
+                        <span class="missing-if-branch" title="else path not taken" >E</span>if (!found) {
+                            deferred.resolve(datas[0]);
+                        }
+                    }
+                );
+            }
+        );
+&nbsp;
+        return deferred.promise;
+    },
+&nbsp;
+    getCodec: function (data) {
+        "use strict";
+        var representation = data.Representation_asArray[0],
+            codec = (representation.mimeType + ';codecs="' + representation.codecs + '"');
+        return Q.when(codec);
+    },
+&nbsp;
+    getMimeType: function (data) {
+        "use strict";
+        return Q.when(data.Representation_asArray[0].mimeType);
+    },
+&nbsp;
+    getKID: function (data) {
+        "use strict";
+&nbsp;
+        if (!data || !data.hasOwnProperty("cenc:default_KID")) {
+            return null;
+        }
+        return data["cenc:default_KID"];
+    },
+&nbsp;
+    getContentProtectionData: function (data) {
+        "use strict";
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!data || !data.hasOwnProperty("ContentProtection_asArray") || data.ContentProtection_asArray.length === 0) {
+<span class="cstat-no" title="statement not covered" >            return Q.when(null);</span>
+        }
+        return Q.when(data.ContentProtection_asArray);
+    },
+&nbsp;
+    getIsDynamic: function (manifest) {
+        "use strict";
+        var isDynamic = false,
+            LIVE_TYPE = "dynamic";
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (manifest.hasOwnProperty("type")) {
+            isDynamic = (manifest.type === LIVE_TYPE);
+        }
+&nbsp;
+        return isDynamic;
+    },
+&nbsp;
+    getIsDVR: function (manifest) {
+        "use strict";
+        var isDynamic = this.getIsDynamic(manifest),
+            containsDVR,
+            isDVR;
+&nbsp;
+        containsDVR = !isNaN(manifest.timeShiftBufferDepth);
+        isDVR = (isDynamic &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >containsDVR)</span>;
+&nbsp;
+        return Q.when(isDVR);
+    },
+&nbsp;
+    getIsOnDemand: function (manifest) {
+        "use strict";
+        var isOnDemand = false;
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (manifest.profiles &amp;&amp; manifest.profiles.length &gt; 0) {
+            isOnDemand = (manifest.profiles.indexOf("urn:mpeg:dash:profile:isoff-on-demand:2011") !== -1);
+        }
+&nbsp;
+        return Q.when(isOnDemand);
+    },
+&nbsp;
+    getDuration: function (manifest) {
+        var mpdDuration;
+&nbsp;
+        //@mediaPresentationDuration specifies the duration of the entire Media Presentation.
+        //If the attribute is not present, the duration of the Media Presentation is unknown.
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (manifest.hasOwnProperty("mediaPresentationDuration")) {
+            mpdDuration = manifest.mediaPresentationDuration;
+        } else {
+<span class="cstat-no" title="statement not covered" >            mpdDuration = Number.POSITIVE_INFINITY;</span>
+        }
+&nbsp;
+        return Q.when(mpdDuration);
+    },
+&nbsp;
+    getBandwidth: function (representation) {
+        "use strict";
+        return Q.when(representation.bandwidth);
+    },
+&nbsp;
+    getRefreshDelay: function (manifest) {
+        "use strict";
+        var delay = NaN,
+            minDelay = 2;
+&nbsp;
+        if (manifest.hasOwnProperty("minimumUpdatePeriod")) {
+            delay = Math.max(parseFloat(manifest.minimumUpdatePeriod), minDelay);
+        }
+&nbsp;
+        return Q.when(delay);
+    },
+&nbsp;
+    getRepresentationCount: function (adaptation) {
+        "use strict";
+        return Q.when(adaptation.Representation_asArray.length);
+    },
+&nbsp;
+    getRepresentationFor: function (index, data) {
+        "use strict";
+        return Q.when(data.Representation_asArray[index]);
+    },
+&nbsp;
+    getRepresentationsForAdaptation: <span class="fstat-no" title="function not covered" >function(manifest, adaptation) {</span>
+<span class="cstat-no" title="statement not covered" >        var self = this,</span>
+            a = self.processAdaptation(manifest.Period_asArray[adaptation.period.index].AdaptationSet_asArray[adaptation.index]),
+            representations = [],
+            deferred = Q.defer(),
+            representation,
+            initialization,
+            segmentInfo,
+            r;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (var i = 0; i &lt; a.Representation_asArray.length; i += 1) {</span>
+<span class="cstat-no" title="statement not covered" >            r = a.Representation_asArray[i];</span>
+<span class="cstat-no" title="statement not covered" >            representation = new Dash.vo.Representation();</span>
+<span class="cstat-no" title="statement not covered" >            representation.index = i;</span>
+<span class="cstat-no" title="statement not covered" >            representation.adaptation = adaptation;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (r.hasOwnProperty("id")) {</span>
+<span class="cstat-no" title="statement not covered" >                representation.id = r.id;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (r.hasOwnProperty("SegmentBase")) {</span>
+<span class="cstat-no" title="statement not covered" >                segmentInfo = r.SegmentBase;</span>
+<span class="cstat-no" title="statement not covered" >                representation.segmentInfoType = "SegmentBase";</span>
+            }
+            else <span class="cstat-no" title="statement not covered" >if (r.hasOwnProperty("SegmentList")) {</span>
+<span class="cstat-no" title="statement not covered" >                segmentInfo = r.SegmentList;</span>
+<span class="cstat-no" title="statement not covered" >                representation.segmentInfoType = "SegmentList";</span>
+<span class="cstat-no" title="statement not covered" >                representation.useCalculatedLiveEdgeTime = true;</span>
+            }
+            else <span class="cstat-no" title="statement not covered" >if (r.hasOwnProperty("SegmentTemplate")) {</span>
+<span class="cstat-no" title="statement not covered" >                segmentInfo = r.SegmentTemplate;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (segmentInfo.hasOwnProperty("SegmentTimeline")) {</span>
+<span class="cstat-no" title="statement not covered" >                    representation.segmentInfoType = "SegmentTimeline";</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    representation.segmentInfoType = "SegmentTemplate";</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (segmentInfo.hasOwnProperty("initialization")) {</span>
+<span class="cstat-no" title="statement not covered" >                    representation.initialization = segmentInfo.initialization.split("$Bandwidth$")</span>
+                        .join(r.bandwidth).split("$RepresentationID$").join(r.id);
+                }
+            } else {
+<span class="cstat-no" title="statement not covered" >                segmentInfo = r.BaseURL;</span>
+<span class="cstat-no" title="statement not covered" >                representation.segmentInfoType = "BaseURL";</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (segmentInfo.hasOwnProperty("Initialization")) {</span>
+<span class="cstat-no" title="statement not covered" >                initialization = segmentInfo.Initialization;</span>
+<span class="cstat-no" title="statement not covered" >                if (initialization.hasOwnProperty("sourceURL")) {</span>
+<span class="cstat-no" title="statement not covered" >                    representation.initialization = initialization.sourceURL;</span>
+                } else <span class="cstat-no" title="statement not covered" >if (initialization.hasOwnProperty("range")) {</span>
+<span class="cstat-no" title="statement not covered" >                    representation.initialization = r.BaseURL;</span>
+<span class="cstat-no" title="statement not covered" >                    representation.range = initialization.range;</span>
+                }
+            } else <span class="cstat-no" title="statement not covered" >if (r.hasOwnProperty("mimeType") &amp;&amp; self.getIsTextTrack(r.mimeType)) {</span>
+<span class="cstat-no" title="statement not covered" >                representation.initialization = r.BaseURL;</span>
+<span class="cstat-no" title="statement not covered" >                representation.range = 0;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (segmentInfo.hasOwnProperty("timescale")) {</span>
+<span class="cstat-no" title="statement not covered" >                representation.timescale = segmentInfo.timescale;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (segmentInfo.hasOwnProperty("duration")) {</span>
+                // TODO according to the spec @maxSegmentDuration specifies the maximum duration of any Segment in any Representation in the Media Presentation
+                // It is also said that for a SegmentTimeline any @d value shall not exceed the value of MPD@maxSegmentDuration, but nothing is said about
+                // SegmentTemplate @duration attribute. We need to find out if @maxSegmentDuration should be used instead of calculated duration if the the duration
+                // exceeds @maxSegmentDuration
+                //representation.segmentDuration = Math.min(segmentInfo.duration / representation.timescale, adaptation.period.mpd.maxSegmentDuration);
+<span class="cstat-no" title="statement not covered" >                representation.segmentDuration = segmentInfo.duration / representation.timescale;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (segmentInfo.hasOwnProperty("startNumber")) {</span>
+<span class="cstat-no" title="statement not covered" >                representation.startNumber = segmentInfo.startNumber;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (segmentInfo.hasOwnProperty("indexRange")) {</span>
+<span class="cstat-no" title="statement not covered" >                representation.indexRange = segmentInfo.indexRange;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (segmentInfo.hasOwnProperty("presentationTimeOffset")) {</span>
+<span class="cstat-no" title="statement not covered" >                representation.presentationTimeOffset = segmentInfo.presentationTimeOffset / representation.timescale;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            representation.MSETimeOffset = self.timelineConverter.calcMSETimeOffset(representation);</span>
+<span class="cstat-no" title="statement not covered" >            representations.push(representation);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        deferred.resolve(representations);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return deferred.promise;</span>
+    },
+&nbsp;
+    getAdaptationsForPeriod: <span class="fstat-no" title="function not covered" >function(manifest, period) {</span>
+<span class="cstat-no" title="statement not covered" >        var p = manifest.Period_asArray[period.index],</span>
+            adaptations = [],
+            adaptationSet;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (var i = 0; i &lt; p.AdaptationSet_asArray.length; i += 1) {</span>
+<span class="cstat-no" title="statement not covered" >            adaptationSet = new Dash.vo.AdaptationSet();</span>
+<span class="cstat-no" title="statement not covered" >            adaptationSet.index = i;</span>
+<span class="cstat-no" title="statement not covered" >            adaptationSet.period = period;</span>
+<span class="cstat-no" title="statement not covered" >            adaptations.push(adaptationSet);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return Q.when(adaptations);</span>
+    },
+&nbsp;
+    getRegularPeriods: <span class="fstat-no" title="function not covered" >function (manifest, mpd) {</span>
+<span class="cstat-no" title="statement not covered" >        var self = this,</span>
+            deferred = Q.defer(),
+            periods = [],
+            isDynamic = self.getIsDynamic(manifest),
+            i,
+            len,
+            p1 = null,
+            p = null,
+            vo1 = null,
+            vo = null;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (i = 0, len = manifest.Period_asArray.length; i &lt; len; i += 1) {</span>
+<span class="cstat-no" title="statement not covered" >            p = manifest.Period_asArray[i];</span>
+&nbsp;
+            // If the attribute @start is present in the Period, then the
+            // Period is a regular Period and the PeriodStart is equal
+            // to the value of this attribute.
+<span class="cstat-no" title="statement not covered" >            if (p.hasOwnProperty("start")){</span>
+<span class="cstat-no" title="statement not covered" >                vo = new Dash.vo.Period();</span>
+<span class="cstat-no" title="statement not covered" >                vo.start = p.start;</span>
+            }
+            // If the @start attribute is absent, but the previous Period
+            // element contains a @duration attribute then then this new
+            // Period is also a regular Period. The start time of the new
+            // Period PeriodStart is the sum of the start time of the previous
+            // Period PeriodStart and the value of the attribute @duration
+            // of the previous Period.
+            else <span class="cstat-no" title="statement not covered" >if (p1 !== null &amp;&amp; p.hasOwnProperty("duration")){</span>
+<span class="cstat-no" title="statement not covered" >                vo = new Dash.vo.Period();</span>
+<span class="cstat-no" title="statement not covered" >                vo.start = vo1.start + vo1.duration;</span>
+<span class="cstat-no" title="statement not covered" >                vo.duration = p.duration;</span>
+            }
+            // If (i) @start attribute is absent, and (ii) the Period element
+            // is the first in the MPD, and (iii) the MPD@type is 'static',
+            // then the PeriodStart time shall be set to zero.
+            else <span class="cstat-no" title="statement not covered" >if (i === 0 &amp;&amp; !isDynamic) {</span>
+<span class="cstat-no" title="statement not covered" >                vo = new Dash.vo.Period();</span>
+<span class="cstat-no" title="statement not covered" >                vo.start = 0;</span>
+            }
+&nbsp;
+            // The Period extends until the PeriodStart of the next Period.
+            // The difference between the PeriodStart time of a Period and
+            // the PeriodStart time of the following Period.
+<span class="cstat-no" title="statement not covered" >            if (vo1 !== null &amp;&amp; isNaN(vo1.duration))</span>
+            {
+<span class="cstat-no" title="statement not covered" >                vo1.duration = vo.start - vo1.start;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (vo !== null &amp;&amp; p.hasOwnProperty("id")){</span>
+<span class="cstat-no" title="statement not covered" >                vo.id = p.id;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (vo !== null &amp;&amp; p.hasOwnProperty("duration")){</span>
+<span class="cstat-no" title="statement not covered" >                vo.duration = p.duration;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (vo !== null){</span>
+<span class="cstat-no" title="statement not covered" >                vo.index = i;</span>
+<span class="cstat-no" title="statement not covered" >                vo.mpd = mpd;</span>
+<span class="cstat-no" title="statement not covered" >                periods.push(vo);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            p1 = p;</span>
+<span class="cstat-no" title="statement not covered" >            p = null;</span>
+<span class="cstat-no" title="statement not covered" >            vo1 = vo;</span>
+<span class="cstat-no" title="statement not covered" >            vo = null;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (periods.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >            return Q.when(periods);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        self.getCheckTime(manifest, periods[0]).then(</span>
+<span class="fstat-no" title="function not covered" >            function(checkTime) {</span>
+<span class="cstat-no" title="statement not covered" >                mpd.checkTime = checkTime;</span>
+&nbsp;
+                // The last Period extends until the end of the Media Presentation.
+                // The difference between the PeriodStart time of the last Period
+                // and the mpd duration
+<span class="cstat-no" title="statement not covered" >                if (vo1 !== null &amp;&amp; isNaN(vo1.duration)) {</span>
+<span class="cstat-no" title="statement not covered" >                    self.getEndTimeForLastPeriod(mpd).then(</span>
+<span class="fstat-no" title="function not covered" >                        function(periodEndTime) {</span>
+<span class="cstat-no" title="statement not covered" >                            vo1.duration = periodEndTime - vo1.start;</span>
+<span class="cstat-no" title="statement not covered" >                            deferred.resolve(periods);</span>
+                        }
+                    );
+                } else {
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve(periods);</span>
+                }
+            }
+        );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return Q.when(deferred.promise);</span>
+    },
+&nbsp;
+    getMpd: <span class="fstat-no" title="function not covered" >function(manifest) {</span>
+<span class="cstat-no" title="statement not covered" >        var mpd = new Dash.vo.Mpd();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        mpd.manifest = manifest;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (manifest.hasOwnProperty("availabilityStartTime")) {</span>
+<span class="cstat-no" title="statement not covered" >            mpd.availabilityStartTime = new Date(manifest.availabilityStartTime.getTime());</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            mpd.availabilityStartTime = new Date(manifest.mpdLoadedTime.getTime());</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (manifest.hasOwnProperty("availabilityEndTime")) {</span>
+<span class="cstat-no" title="statement not covered" >            mpd.availabilityEndTime = new Date(manifest.availabilityEndTime.getTime());</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (manifest.hasOwnProperty("suggestedPresentationDelay")) {</span>
+<span class="cstat-no" title="statement not covered" >            mpd.suggestedPresentationDelay = manifest.suggestedPresentationDelay;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (manifest.hasOwnProperty("timeShiftBufferDepth")) {</span>
+<span class="cstat-no" title="statement not covered" >            mpd.timeShiftBufferDepth = manifest.timeShiftBufferDepth;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (manifest.hasOwnProperty("maxSegmentDuration")) {</span>
+<span class="cstat-no" title="statement not covered" >            mpd.maxSegmentDuration = manifest.maxSegmentDuration;</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return Q.when(mpd);</span>
+    },
+&nbsp;
+    getFetchTime: <span class="fstat-no" title="function not covered" >function(manifest, period) {</span>
+        // FetchTime is defined as the time at which the server processes the request for the MPD from the client.
+        // TODO The client typically should not use the time at which it actually successfully received the MPD, but should
+        // take into account delay due to MPD delivery and processing. The fetch is considered successful fetching
+        // either if the client obtains an updated MPD or the client verifies that the MPD has not been updated since the previous fetching.
+<span class="cstat-no" title="statement not covered" >        var fetchTime = this.timelineConverter.calcPresentationTimeFromWallTime(manifest.mpdLoadedTime, period);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return Q.when(fetchTime);</span>
+    },
+&nbsp;
+    getCheckTime: <span class="fstat-no" title="function not covered" >function(manifest, period) {</span>
+<span class="cstat-no" title="statement not covered" >        var self = this,</span>
+            deferred = Q.defer(),
+            checkTime = NaN;
+&nbsp;
+        // If the MPD@minimumUpdatePeriod attribute in the client is provided, then the check time is defined as the
+        // sum of the fetch time of this operating MPD and the value of this attribute,
+        // i.e. CheckTime = FetchTime + MPD@minimumUpdatePeriod.
+<span class="cstat-no" title="statement not covered" >        if (manifest.hasOwnProperty("minimumUpdatePeriod")) {</span>
+<span class="cstat-no" title="statement not covered" >            self.getFetchTime(manifest, period).then(</span>
+<span class="fstat-no" title="function not covered" >                function (fetchTime) {</span>
+<span class="cstat-no" title="statement not covered" >                    checkTime = fetchTime + manifest.minimumUpdatePeriod;</span>
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve(checkTime);</span>
+                }
+            );
+        } else {
+            // TODO If the MPD@minimumUpdatePeriod attribute in the client is not provided, external means are used to
+            // determine CheckTime, such as a priori knowledge, or HTTP cache headers, etc.
+<span class="cstat-no" title="statement not covered" >            deferred.resolve(checkTime);</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return deferred.promise;</span>
+    },
+&nbsp;
+    getEndTimeForLastPeriod: <span class="fstat-no" title="function not covered" >function(mpd) {</span>
+<span class="cstat-no" title="statement not covered" >        var periodEnd;</span>
+&nbsp;
+        // if the MPD@mediaPresentationDuration attribute is present, then PeriodEndTime is defined as the end time of the Media Presentation.
+        // if the MPD@mediaPresentationDuration attribute is not present, then PeriodEndTime is defined as FetchTime + MPD@minimumUpdatePeriod
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (mpd.manifest.mediaPresentationDuration) {</span>
+<span class="cstat-no" title="statement not covered" >            periodEnd = mpd.manifest.mediaPresentationDuration;</span>
+        } else <span class="cstat-no" title="statement not covered" >if (!isNaN(mpd.checkTime)) {</span>
+            // in this case the Period End Time should match CheckTime
+<span class="cstat-no" title="statement not covered" >            periodEnd = mpd.checkTime;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            return Q.fail(new Error("Must have @mediaPresentationDuration or @minimumUpdatePeriod on MPD or an explicit @duration on the last period."));</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return Q.when(periodEnd);</span>
+    },
+&nbsp;
+    getEventsForPeriod: <span class="fstat-no" title="function not covered" >function(manifest,period) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var periodArray = manifest.Period_asArray,</span>
+            eventStreams = periodArray[period.index].EventStream_asArray,
+            events = [];
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if(eventStreams) {</span>
+<span class="cstat-no" title="statement not covered" >            for(var i = 0; i &lt; eventStreams.length; i += 1) {</span>
+<span class="cstat-no" title="statement not covered" >                var eventStream = new Dash.vo.EventStream();</span>
+<span class="cstat-no" title="statement not covered" >                eventStream.period = period;</span>
+<span class="cstat-no" title="statement not covered" >                eventStream.timescale = 1;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if(eventStreams[i].hasOwnProperty("schemeIdUri")) {</span>
+<span class="cstat-no" title="statement not covered" >                    eventStream.schemeIdUri = eventStreams[i].schemeIdUri;</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    throw "Invalid EventStream. SchemeIdUri has to be set";</span>
+                }
+<span class="cstat-no" title="statement not covered" >                if(eventStreams[i].hasOwnProperty("timescale")) {</span>
+<span class="cstat-no" title="statement not covered" >                    eventStream.timescale = eventStreams[i].timescale;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                if(eventStreams[i].hasOwnProperty("value")) {</span>
+<span class="cstat-no" title="statement not covered" >                    eventStream.value = eventStreams[i].value;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                for(var j = 0; j &lt; eventStreams[i].Event_asArray.length; j += 1) {</span>
+<span class="cstat-no" title="statement not covered" >                    var event = new Dash.vo.Event();</span>
+<span class="cstat-no" title="statement not covered" >                    event.presentationTime = 0;</span>
+<span class="cstat-no" title="statement not covered" >                    event.eventStream = eventStream;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    if(eventStreams[i].Event_asArray[j].hasOwnProperty("presentationTime")) {</span>
+<span class="cstat-no" title="statement not covered" >                        event.presentationTime = eventStreams[i].Event_asArray[j].presentationTime;</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    if(eventStreams[i].Event_asArray[j].hasOwnProperty("duration")) {</span>
+<span class="cstat-no" title="statement not covered" >                        event.duration = eventStreams[i].Event_asArray[j].duration;</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    if(eventStreams[i].Event_asArray[j].hasOwnProperty("id")) {</span>
+<span class="cstat-no" title="statement not covered" >                        event.id = eventStreams[i].Event_asArray[j].id;</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    events.push(event);</span>
+                }
+            }
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return Q.when(events);</span>
+    },
+&nbsp;
+    getEventStreamForAdaptationSet : <span class="fstat-no" title="function not covered" >function (data) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var eventStreams = [],</span>
+            inbandStreams = data.InbandEventStream_asArray;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if(inbandStreams) {</span>
+<span class="cstat-no" title="statement not covered" >            for(var i = 0; i &lt; inbandStreams.length ; i += 1 ) {</span>
+<span class="cstat-no" title="statement not covered" >                var eventStream = new Dash.vo.EventStream();</span>
+<span class="cstat-no" title="statement not covered" >                eventStream.timescale = 1;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if(inbandStreams[i].hasOwnProperty("schemeIdUri")) {</span>
+<span class="cstat-no" title="statement not covered" >                    eventStream.schemeIdUri = inbandStreams[i].schemeIdUri;</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    throw "Invalid EventStream. SchemeIdUri has to be set";</span>
+                }
+<span class="cstat-no" title="statement not covered" >                if(inbandStreams[i].hasOwnProperty("timescale")) {</span>
+<span class="cstat-no" title="statement not covered" >                    eventStream.timescale = inbandStreams[i].timescale;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                if(inbandStreams[i].hasOwnProperty("value")) {</span>
+<span class="cstat-no" title="statement not covered" >                    eventStream.value = inbandStreams[i].value;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                eventStreams.push(eventStream);</span>
+            }
+        }
+<span class="cstat-no" title="statement not covered" >        return eventStreams;</span>
+    },
+&nbsp;
+    getEventStreamForRepresentation : <span class="fstat-no" title="function not covered" >function (data,representation) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var eventStreams = [],</span>
+            inbandStreams = data.Representation_asArray[representation.index].InbandEventStream_asArray;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if(inbandStreams) {</span>
+<span class="cstat-no" title="statement not covered" >            for(var i = 0; i &lt; inbandStreams.length ; i++ ) {</span>
+<span class="cstat-no" title="statement not covered" >                var eventStream = new Dash.vo.EventStream();</span>
+<span class="cstat-no" title="statement not covered" >                eventStream.timescale = 1;</span>
+<span class="cstat-no" title="statement not covered" >                eventStream.representation = representation;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if(inbandStreams[i].hasOwnProperty("schemeIdUri")) {</span>
+<span class="cstat-no" title="statement not covered" >                    eventStream.schemeIdUri = inbandStreams[i].schemeIdUri;</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    throw "Invalid EventStream. SchemeIdUri has to be set";</span>
+                }
+<span class="cstat-no" title="statement not covered" >                if(inbandStreams[i].hasOwnProperty("timescale")) {</span>
+<span class="cstat-no" title="statement not covered" >                    eventStream.timescale = inbandStreams[i].timescale;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                if(inbandStreams[i].hasOwnProperty("value")) {</span>
+<span class="cstat-no" title="statement not covered" >                    eventStream.value = inbandStreams[i].value;</span>
+                }
+<span class="cstat-no" title="statement not covered" >                eventStreams.push(eventStream);</span>
+            }
+        }
+<span class="cstat-no" title="statement not covered" >        return eventStreams;</span>
+&nbsp;
+    }
+&nbsp;
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jan 17 2015 15:18:38 GMT-0500 (EST)</div>
+</div>
+
+<script src="../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

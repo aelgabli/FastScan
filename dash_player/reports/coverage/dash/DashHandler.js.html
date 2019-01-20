@@ -1,0 +1,3658 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for dash/DashHandler.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">dash/DashHandler.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">2.82% <small>(12 / 425)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">1.12% <small>(2 / 179)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">7.41% <small>(4 / 54)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">2.87% <small>(12 / 418)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">dash/</a> &#187; DashHandler.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898
+899
+900
+901
+902
+903
+904
+905
+906
+907
+908
+909
+910
+911
+912
+913
+914
+915
+916
+917
+918
+919
+920
+921
+922
+923
+924
+925
+926
+927
+928
+929
+930
+931
+932
+933
+934
+935
+936
+937
+938
+939
+940
+941
+942
+943
+944
+945
+946
+947
+948
+949
+950
+951
+952
+953
+954
+955
+956
+957
+958
+959
+960
+961
+962
+963
+964
+965
+966
+967
+968
+969
+970
+971
+972
+973
+974
+975
+976
+977
+978
+979
+980
+981
+982
+983
+984
+985
+986
+987
+988
+989
+990
+991
+992
+993
+994
+995
+996
+997
+998
+999
+1000
+1001
+1002
+1003
+1004
+1005
+1006
+1007
+1008
+1009
+1010
+1011
+1012
+1013
+1014
+1015
+1016
+1017
+1018
+1019
+1020
+1021
+1022
+1023
+1024
+1025
+1026
+1027
+1028
+1029
+1030
+1031
+1032
+1033
+1034
+1035
+1036
+1037
+1038
+1039
+1040
+1041
+1042
+1043
+1044
+1045
+1046
+1047
+1048
+1049
+1050
+1051
+1052
+1053
+1054
+1055
+1056
+1057
+1058
+1059
+1060
+1061
+1062
+1063
+1064
+1065
+1066
+1067
+1068
+1069
+1070
+1071
+1072
+1073
+1074
+1075
+1076
+1077
+1078
+1079
+1080
+1081
+1082
+1083
+1084
+1085
+1086
+1087
+1088
+1089
+1090
+1091
+1092
+1093
+1094
+1095
+1096
+1097
+1098
+1099
+1100
+1101
+1102
+1103
+1104
+1105
+1106
+1107
+1108
+1109
+1110
+1111
+1112
+1113</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * The copyright in this software is being made available under the BSD License, included below. This software may be subject to other third party and contributor rights, including patent rights, and no such rights are granted under this license.
+ *
+ * Copyright (c) 2013, Digital Primates
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * •  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * •  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ * •  Neither the name of the Digital Primates nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+Dash.dependencies.DashHandler = function () {
+    "use strict";
+&nbsp;
+    var index = -1,
+        requestedTime,
+        isDynamic,
+        type,
+        offset = null,
+&nbsp;
+        zeroPadToLength = <span class="fstat-no" title="function not covered" >function (numStr, minStrLength) {</span>
+<span class="cstat-no" title="statement not covered" >            while (numStr.length &lt; minStrLength) {</span>
+<span class="cstat-no" title="statement not covered" >                numStr = "0" + numStr;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return numStr;</span>
+        },
+&nbsp;
+        replaceTokenForTemplate = <span class="fstat-no" title="function not covered" >function (url, token, value) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            var startPos = 0,</span>
+                endPos = 0,
+                tokenLen = token.length,
+                formatTag = "%0",
+                formatTagLen = formatTag.length,
+                formatTagPos,
+                specifier,
+                width,
+                paddedValue;
+&nbsp;
+            // keep looping round until all instances of &lt;token&gt; have been
+            // replaced. once that has happened, startPos below will be -1
+            // and the completed url will be returned.
+<span class="cstat-no" title="statement not covered" >            while (true) {</span>
+&nbsp;
+                // check if there is a valid $&lt;token&gt;...$ identifier
+                // if not, return the url as is.
+<span class="cstat-no" title="statement not covered" >                startPos = url.indexOf("$" + token);</span>
+<span class="cstat-no" title="statement not covered" >                if (startPos &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    return url;</span>
+                }
+&nbsp;
+                // the next '$' must be the end of the identifer
+                // if there isn't one, return the url as is.
+<span class="cstat-no" title="statement not covered" >                endPos = url.indexOf("$", startPos + tokenLen);</span>
+<span class="cstat-no" title="statement not covered" >                if (endPos &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    return url;</span>
+                }
+&nbsp;
+                // now see if there is an additional format tag suffixed to
+                // the identifier within the enclosing '$' characters
+<span class="cstat-no" title="statement not covered" >                formatTagPos = url.indexOf(formatTag, startPos + tokenLen);</span>
+<span class="cstat-no" title="statement not covered" >                if (formatTagPos &gt; startPos &amp;&amp; formatTagPos &lt; endPos) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    specifier = url.charAt(endPos - 1);</span>
+<span class="cstat-no" title="statement not covered" >                    width = parseInt(url.substring(formatTagPos + formatTagLen, endPos - 1), 10);</span>
+&nbsp;
+                    // support the minimum specifiers required by IEEE 1003.1
+                    // (d, i , o, u, x, and X) for completeness
+<span class="cstat-no" title="statement not covered" >                    switch (specifier) {</span>
+                    // treat all int types as uint,
+                    // hence deliberate fallthrough
+                    case 'd':
+                    case 'i':
+                    case 'u':
+<span class="cstat-no" title="statement not covered" >                        paddedValue = zeroPadToLength(value.toString(), width);</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'x':
+<span class="cstat-no" title="statement not covered" >                        paddedValue = zeroPadToLength(value.toString(16), width);</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'X':
+<span class="cstat-no" title="statement not covered" >                        paddedValue = zeroPadToLength(value.toString(16), width).toUpperCase();</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    case 'o':
+<span class="cstat-no" title="statement not covered" >                        paddedValue = zeroPadToLength(value.toString(8), width);</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    default:
+<span class="cstat-no" title="statement not covered" >                        this.debug.log("Unsupported/invalid IEEE 1003.1 format identifier string in URL");</span>
+<span class="cstat-no" title="statement not covered" >                        return url;</span>
+                    }
+                } else {
+<span class="cstat-no" title="statement not covered" >                    paddedValue = value;</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                url = url.substring(0, startPos) + paddedValue + url.substring(endPos + 1);</span>
+            }
+        },
+&nbsp;
+        unescapeDollarsInTemplate = <span class="fstat-no" title="function not covered" >function (url) {</span>
+<span class="cstat-no" title="statement not covered" >            return url.split("$$").join("$");</span>
+        },
+&nbsp;
+        replaceIDForTemplate = <span class="fstat-no" title="function not covered" >function (url, value) {</span>
+<span class="cstat-no" title="statement not covered" >            if (value === null || url.indexOf("$RepresentationID$") === -1) { <span class="cstat-no" title="statement not covered" >return url; </span>}</span>
+<span class="cstat-no" title="statement not covered" >            var v = value.toString();</span>
+<span class="cstat-no" title="statement not covered" >            return url.split("$RepresentationID$").join(v);</span>
+        },
+&nbsp;
+        getNumberForSegment = <span class="fstat-no" title="function not covered" >function(segment, segmentIndex) {</span>
+<span class="cstat-no" title="statement not covered" >            return segment.representation.startNumber + segmentIndex;</span>
+        },
+&nbsp;
+        getRequestUrl = <span class="fstat-no" title="function not covered" >function (destination, representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var baseURL = representation.adaptation.period.mpd.manifest.Period_asArray[representation.adaptation.period.index].</span>
+                    AdaptationSet_asArray[representation.adaptation.index].Representation_asArray[representation.index].BaseURL,
+                url;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (destination === baseURL) {</span>
+<span class="cstat-no" title="statement not covered" >                url = destination;</span>
+            } else <span class="cstat-no" title="statement not covered" >if (destination.indexOf("http://") !== -1) {</span>
+<span class="cstat-no" title="statement not covered" >                url = destination;</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                url = baseURL + destination;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return url;</span>
+        },
+&nbsp;
+        generateInitRequest = <span class="fstat-no" title="function not covered" >function(representation, streamType) {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                period,
+                request = new MediaPlayer.vo.SegmentRequest(),
+                presentationStartTime;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            period = representation.adaptation.period;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            request.streamType = streamType;</span>
+<span class="cstat-no" title="statement not covered" >            request.type = "Initialization Segment";</span>
+<span class="cstat-no" title="statement not covered" >            request.url = getRequestUrl(representation.initialization, representation);</span>
+<span class="cstat-no" title="statement not covered" >            request.range = representation.range;</span>
+<span class="cstat-no" title="statement not covered" >            presentationStartTime = period.start;</span>
+<span class="cstat-no" title="statement not covered" >            request.availabilityStartTime = self.timelineConverter.calcAvailabilityStartTimeFromPresentationTime(presentationStartTime, representation.adaptation.period.mpd, isDynamic);</span>
+<span class="cstat-no" title="statement not covered" >            request.availabilityEndTime = self.timelineConverter.calcAvailabilityEndTimeFromPresentationTime(presentationStartTime + period.duration, period.mpd, isDynamic);</span>
+<span class="cstat-no" title="statement not covered" >            request.quality = representation.index;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return request;</span>
+        },
+&nbsp;
+        getInit = <span class="fstat-no" title="function not covered" >function (representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var deferred = Q.defer(),</span>
+                request = null,
+                url = null,
+                self = this;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (!representation) {</span>
+<span class="cstat-no" title="statement not covered" >                return Q.reject("no represenation");</span>
+            }
+&nbsp;
+            //self.debug.log("Getting the initialization request.");
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (representation.initialization) {</span>
+                //self.debug.log("Got an initialization.");
+<span class="cstat-no" title="statement not covered" >                request = generateInitRequest.call(self, representation, type);</span>
+<span class="cstat-no" title="statement not covered" >                deferred.resolve(request);</span>
+            } else {
+                // Go out and find the initialization.
+<span class="cstat-no" title="statement not covered" >                url = representation.adaptation.period.mpd.manifest.Period_asArray[representation.adaptation.period.index].</span>
+                    AdaptationSet_asArray[representation.adaptation.index].Representation_asArray[representation.index].BaseURL;
+<span class="cstat-no" title="statement not covered" >                self.baseURLExt.loadInitialization(url).then(</span>
+<span class="fstat-no" title="function not covered" >                    function (theRange) {</span>
+                        //self.debug.log("Got an initialization.");
+<span class="cstat-no" title="statement not covered" >                        representation.range = theRange;</span>
+<span class="cstat-no" title="statement not covered" >                        representation.initialization = url;</span>
+<span class="cstat-no" title="statement not covered" >                        request = generateInitRequest.call(self, representation, type);</span>
+<span class="cstat-no" title="statement not covered" >                        deferred.resolve(request);</span>
+                    },
+<span class="fstat-no" title="function not covered" >                    function (httprequest) {</span>
+<span class="cstat-no" title="statement not covered" >                        deferred.reject(httprequest);</span>
+                    }
+                );
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        },
+&nbsp;
+        isMediaFinished = <span class="fstat-no" title="function not covered" >function (representation) {</span> // TODO
+<span class="cstat-no" title="statement not covered" >            var sDuration,</span>
+                period = representation.adaptation.period,
+                isFinished = false,
+                seg,
+                fTime;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if(offset === null || offset &gt; representation.segments[0].availabilityIdx) {</span>
+<span class="cstat-no" title="statement not covered" >                offset = representation.segments[0].availabilityIdx;</span>
+            }
+&nbsp;
+            //this.debug.log("Checking for stream end...");
+<span class="cstat-no" title="statement not covered" >            if (isDynamic) {</span>
+                //this.debug.log("Live never ends! (TODO)");
+                // TODO : Check the contents of the last box to signal end.
+<span class="cstat-no" title="statement not covered" >                isFinished = false;</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                if (index &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    isFinished = false;</span>
+                } else <span class="cstat-no" title="statement not covered" >if (index &lt; representation.availableSegmentsNumber + offset) {</span>
+<span class="cstat-no" title="statement not covered" >                    seg = getSegmentByIndex(index, representation);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    if (seg) {</span>
+<span class="cstat-no" title="statement not covered" >                        fTime = seg.presentationStartTime - period.start;</span>
+<span class="cstat-no" title="statement not covered" >                        sDuration = representation.adaptation.period.duration;</span>
+<span class="cstat-no" title="statement not covered" >                        this.debug.log(representation.segmentInfoType + ": " + fTime + " / " + sDuration);</span>
+<span class="cstat-no" title="statement not covered" >                        isFinished = (fTime &gt;= sDuration);</span>
+                    }
+                } else {
+<span class="cstat-no" title="statement not covered" >                    isFinished = true;</span>
+                }
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return Q.when(isFinished);</span>
+        },
+&nbsp;
+        getIndexBasedSegment = <span class="fstat-no" title="function not covered" >function (representation, index) {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                seg,
+                duration,
+                presentationStartTime,
+                presentationEndTime;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            duration = representation.segmentDuration;</span>
+<span class="cstat-no" title="statement not covered" >            presentationStartTime = representation.adaptation.period.start + (index * duration);</span>
+<span class="cstat-no" title="statement not covered" >            presentationEndTime = presentationStartTime + duration;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            seg = new Dash.vo.Segment();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            seg.representation = representation;</span>
+<span class="cstat-no" title="statement not covered" >            seg.duration = duration;</span>
+<span class="cstat-no" title="statement not covered" >            seg.presentationStartTime = presentationStartTime;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            seg.mediaStartTime = self.timelineConverter.calcMediaTimeFromPresentationTime(seg.presentationStartTime, representation);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            seg.availabilityStartTime = self.timelineConverter.calcAvailabilityStartTimeFromPresentationTime(seg.presentationStartTime, representation.adaptation.period.mpd, isDynamic);</span>
+<span class="cstat-no" title="statement not covered" >            seg.availabilityEndTime = self.timelineConverter.calcAvailabilityEndTimeFromPresentationTime(presentationEndTime, representation.adaptation.period.mpd, isDynamic);</span>
+&nbsp;
+            // at this wall clock time, the video element currentTime should be seg.presentationStartTime
+<span class="cstat-no" title="statement not covered" >            seg.wallStartTime = self.timelineConverter.calcWallTimeForSegment(seg, isDynamic);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            seg.replacementNumber = getNumberForSegment(seg, index);</span>
+<span class="cstat-no" title="statement not covered" >            seg.availabilityIdx = index;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return seg;</span>
+        },
+&nbsp;
+        getSegmentsFromTimeline = <span class="fstat-no" title="function not covered" >function (representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                template = representation.adaptation.period.mpd.manifest.Period_asArray[representation.adaptation.period.index].
+                    AdaptationSet_asArray[representation.adaptation.index].Representation_asArray[representation.index].SegmentTemplate,
+                timeline = template.SegmentTimeline,
+                isAvailableSegmentNumberCalculated = representation.availableSegmentsNumber &gt; 0,
+                maxSegmentsAhead = 10,
+                segments = [],
+                fragments,
+                frag,
+                i,
+                len,
+                j,
+                repeat,
+                repeatEndTime,
+                nextFrag,
+                time = 0,
+                availabilityIdx = -1,
+                calculatedRange,
+                hasEnoughSegments,
+                requiredMediaTime,
+                startIdx,
+                endIdx,
+                fTimescale,
+                createSegment = <span class="fstat-no" title="function not covered" >function(s) {</span>
+<span class="cstat-no" title="statement not covered" >                    return getTimeBasedSegment.call(</span>
+                        self,
+                        representation,
+                        time,
+                        s.d,
+                        fTimescale,
+                        template.media,
+                        s.mediaRange,
+                        availabilityIdx);
+                };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            fTimescale = representation.timescale;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            fragments = timeline.S_asArray;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            calculatedRange = decideSegmentListRangeForTimeline.call(self, representation);</span>
+&nbsp;
+            // if calculatedRange exists we should generate segments that belong to this range.
+            // Otherwise generate maxSegmentsAhead segments ahead of the requested time
+<span class="cstat-no" title="statement not covered" >            if (calculatedRange) {</span>
+<span class="cstat-no" title="statement not covered" >                startIdx = calculatedRange.start;</span>
+<span class="cstat-no" title="statement not covered" >                endIdx = calculatedRange.end;</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                requiredMediaTime = self.timelineConverter.calcMediaTimeFromPresentationTime(requestedTime || 0, representation);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            for (i = 0, len = fragments.length; i &lt; len; i += 1) {</span>
+<span class="cstat-no" title="statement not covered" >                frag = fragments[i];</span>
+<span class="cstat-no" title="statement not covered" >                repeat = 0;</span>
+<span class="cstat-no" title="statement not covered" >                if (frag.hasOwnProperty("r")) {</span>
+<span class="cstat-no" title="statement not covered" >                    repeat = frag.r;</span>
+                }
+&nbsp;
+                //For a repeated S element, t belongs only to the first segment
+<span class="cstat-no" title="statement not covered" >                if (frag.hasOwnProperty("t")) {</span>
+<span class="cstat-no" title="statement not covered" >                    time = frag.t;</span>
+                }
+&nbsp;
+                //This is a special case: "A negative value of the @r attribute of the S element indicates that the duration indicated in @d attribute repeats until the start of the next S element, the end of the Period or until the 
+                // next MPD update."
+<span class="cstat-no" title="statement not covered" >                if (repeat &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    nextFrag = fragments[i+1];</span>
+<span class="cstat-no" title="statement not covered" >                    repeatEndTime = (nextFrag &amp;&amp; nextFrag.hasOwnProperty("t")) ? (nextFrag.t / fTimescale) : representation.adaptation.period.duration;</span>
+<span class="cstat-no" title="statement not covered" >                    repeat = Math.ceil((repeatEndTime - time/fTimescale)/(frag.d/fTimescale)) - 1;</span>
+                }
+&nbsp;
+                // if we have enough segments in the list, but we have not calculated the total number of the segments yet we
+                // should continue the loop and calc the number. Once it is calculated, we can break the loop.
+<span class="cstat-no" title="statement not covered" >                if (hasEnoughSegments) {</span>
+<span class="cstat-no" title="statement not covered" >                    if (isAvailableSegmentNumberCalculated) <span class="cstat-no" title="statement not covered" >break;</span></span>
+<span class="cstat-no" title="statement not covered" >                    availabilityIdx += repeat + 1;</span>
+<span class="cstat-no" title="statement not covered" >                    continue;</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                for (j = 0; j &lt;= repeat; j += 1) {</span>
+<span class="cstat-no" title="statement not covered" >                    availabilityIdx += 1;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    if (calculatedRange) {</span>
+<span class="cstat-no" title="statement not covered" >                        if (availabilityIdx &gt; endIdx) {</span>
+<span class="cstat-no" title="statement not covered" >                            hasEnoughSegments = true;</span>
+<span class="cstat-no" title="statement not covered" >                            if (isAvailableSegmentNumberCalculated) <span class="cstat-no" title="statement not covered" >break;</span></span>
+<span class="cstat-no" title="statement not covered" >                            continue;</span>
+                        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        if (availabilityIdx &gt;= startIdx) {</span>
+<span class="cstat-no" title="statement not covered" >                            segments.push(createSegment.call(self, frag));</span>
+                        }
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        if (segments.length &gt; maxSegmentsAhead) {</span>
+<span class="cstat-no" title="statement not covered" >                            hasEnoughSegments = true;</span>
+<span class="cstat-no" title="statement not covered" >                            if (isAvailableSegmentNumberCalculated) <span class="cstat-no" title="statement not covered" >break;</span></span>
+<span class="cstat-no" title="statement not covered" >                            continue;</span>
+                        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        if (time/fTimescale &gt;= (requiredMediaTime - (frag.d / fTimescale))) {</span>
+<span class="cstat-no" title="statement not covered" >                            segments.push(createSegment.call(self, frag));</span>
+                        }
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    time += frag.d;</span>
+                }
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (!isAvailableSegmentNumberCalculated) {</span>
+<span class="cstat-no" title="statement not covered" >                var availabilityStartTime,</span>
+                    availabilityEndTime,
+                    f = fragments[0];
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                availabilityStartTime = (f.t === undefined) ? 0 : self.timelineConverter.calcPresentationTimeFromMediaTime(f.t / fTimescale, representation);</span>
+<span class="cstat-no" title="statement not covered" >                availabilityEndTime = self.timelineConverter.calcPresentationTimeFromMediaTime((time - frag.d) / fTimescale, representation);</span>
+<span class="cstat-no" title="statement not covered" >                representation.segmentAvailabilityRange = {start: availabilityStartTime, end: availabilityEndTime};</span>
+<span class="cstat-no" title="statement not covered" >                representation.availableSegmentsNumber = availabilityIdx + 1;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return Q.when(segments);</span>
+        },
+&nbsp;
+        getSegmentsFromTemplate = <span class="fstat-no" title="function not covered" >function (representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var segments = [],</span>
+                self = this,
+                deferred = Q.defer(),
+                template = representation.adaptation.period.mpd.manifest.Period_asArray[representation.adaptation.period.index].
+                    AdaptationSet_asArray[representation.adaptation.index].Representation_asArray[representation.index].SegmentTemplate,
+                duration = representation.segmentDuration,
+                segmentRange = null,
+                periodStartIdx = Math.floor(representation.adaptation.period.start / duration),
+                i,
+                startIdx,
+                endIdx,
+                seg = null,
+                start,
+                url = null;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            start = representation.startNumber;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            waitForAvailabilityWindow.call(self, representation).then(</span>
+<span class="fstat-no" title="function not covered" >                function(availabilityWindow) {</span>
+<span class="cstat-no" title="statement not covered" >                    representation.segmentAvailabilityRange = availabilityWindow;</span>
+<span class="cstat-no" title="statement not covered" >                    segmentRange = decideSegmentListRangeForTemplate.call(self, representation);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    startIdx = segmentRange.start;</span>
+<span class="cstat-no" title="statement not covered" >                    endIdx = segmentRange.end;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    for (i = startIdx;i &lt;= endIdx; i += 1) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        seg = getIndexBasedSegment.call(</span>
+                            self,
+                            representation,
+                            i - (isDynamic ? periodStartIdx : 0));
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        seg.replacementTime = (start + i - 1) * representation.segmentDuration;</span>
+<span class="cstat-no" title="statement not covered" >                        url = template.media;</span>
+<span class="cstat-no" title="statement not covered" >                        url = replaceTokenForTemplate(url, "Number", seg.replacementNumber);</span>
+<span class="cstat-no" title="statement not covered" >                        url = replaceTokenForTemplate(url, "Time", seg.replacementTime);</span>
+<span class="cstat-no" title="statement not covered" >                        seg.media = url;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        segments.push(seg);</span>
+<span class="cstat-no" title="statement not covered" >                        seg = null;</span>
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    representation.availableSegmentsNumber = periodStartIdx + Math.ceil((availabilityWindow.end - availabilityWindow.start) / duration);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve(segments);</span>
+                }
+            );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        },
+&nbsp;
+        decideSegmentListRangeForTemplate = <span class="fstat-no" title="function not covered" >function(representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                periodStart = representation.adaptation.period.start,
+                duration = representation.segmentDuration,
+                minBufferTime = representation.adaptation.period.mpd.manifest.minBufferTime,
+                availabilityWindow = representation.segmentAvailabilityRange,
+                originAvailabilityTime = NaN,
+                originSegment = null,
+                currentSegmentList = representation.segments,
+                availabilityLowerLimit = 2 * duration,
+                availabilityUpperLimit = Math.max(2 * minBufferTime, 10 * duration),
+                start,
+                end,
+                range;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (!availabilityWindow) {</span>
+<span class="cstat-no" title="statement not covered" >                availabilityWindow = self.timelineConverter.calcSegmentAvailabilityRange(representation, isDynamic);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (isDynamic &amp;&amp; !representation.adaptation.period.mpd.isClientServerTimeSyncCompleted) {</span>
+<span class="cstat-no" title="statement not covered" >                start = Math.floor(availabilityWindow.start / duration);</span>
+<span class="cstat-no" title="statement not covered" >                end = Math.floor(availabilityWindow.end / duration);</span>
+<span class="cstat-no" title="statement not covered" >                range = {start: start, end: end};</span>
+<span class="cstat-no" title="statement not covered" >                return range;</span>
+            }
+&nbsp;
+            // if segments exist we should try to find the latest buffered time, which is the presentation time of the
+            // segment for the current index
+<span class="cstat-no" title="statement not covered" >            if (currentSegmentList) {</span>
+<span class="cstat-no" title="statement not covered" >                originSegment = getSegmentByIndex(index, representation);</span>
+<span class="cstat-no" title="statement not covered" >                originAvailabilityTime = originSegment ? (originSegment.presentationStartTime - periodStart) : (index &gt; 0 ? (index * duration) : (requestedTime - periodStart) || (currentSegmentList[0].presentationStartTime - periodStart));</span>
+            } else {
+                // If no segments exist, but index &gt; 0, it means that we switch to the other representation, so
+                // we should proceed from this time.
+                // Otherwise we should start from the beginning for static mpds or from the end (live edge) for dynamic mpds
+<span class="cstat-no" title="statement not covered" >                originAvailabilityTime = (index &gt; 0) ? (index * duration) : (isDynamic ? availabilityWindow.end : availabilityWindow.start);</span>
+            }
+&nbsp;
+            // segment list should not be out of the availability window range
+<span class="cstat-no" title="statement not covered" >            start = Math.floor(Math.max(originAvailabilityTime - availabilityLowerLimit, availabilityWindow.start) / duration);</span>
+<span class="cstat-no" title="statement not covered" >            end = Math.floor(Math.min(start + availabilityUpperLimit / duration, availabilityWindow.end / duration));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            range = {start: start, end: end};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return range;</span>
+        },
+&nbsp;
+        decideSegmentListRangeForTimeline = <span class="fstat-no" title="function not covered" >function(representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var originAvailabilityIdx = NaN,</span>
+                currentSegmentList = representation.segments,
+                availabilityLowerLimit = 2,
+                availabilityUpperLimit = 10,
+                firstIdx = 0,
+                lastIdx = Number.POSITIVE_INFINITY,
+                start,
+                end,
+                range;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (isDynamic &amp;&amp; !representation.adaptation.period.mpd.isClientServerTimeSyncCompleted) {</span>
+<span class="cstat-no" title="statement not covered" >                range = {start: firstIdx, end: lastIdx};</span>
+<span class="cstat-no" title="statement not covered" >                return range;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if(!isDynamic &amp;&amp; requestedTime) <span class="cstat-no" title="statement not covered" >return null;</span></span>
+&nbsp;
+            // if segments exist use the current index as an origin index for a new range
+<span class="cstat-no" title="statement not covered" >            if (currentSegmentList) {</span>
+                // if the index is negative we can't calculate the range right now
+<span class="cstat-no" title="statement not covered" >                if (index &lt; 0) <span class="cstat-no" title="statement not covered" >return null;</span></span>
+<span class="cstat-no" title="statement not covered" >                originAvailabilityIdx = index;</span>
+            } else {
+                // If no segments exist, but index &gt; 0, it means that we switch to the other representation, so
+                // we should proceed from this index.
+                // Otherwise we should start from the beginning for static mpds or from the end (live edge) for dynamic mpds
+<span class="cstat-no" title="statement not covered" >                originAvailabilityIdx = (index &gt; 0) ? index : (isDynamic ? lastIdx : firstIdx);</span>
+            }
+&nbsp;
+            // segment list should not be out of the availability window range
+<span class="cstat-no" title="statement not covered" >            start = Math.max(originAvailabilityIdx - availabilityLowerLimit, firstIdx);</span>
+<span class="cstat-no" title="statement not covered" >            end = Math.min(originAvailabilityIdx + availabilityUpperLimit, lastIdx);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            range = {start: start, end: end};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return range;</span>
+        },
+&nbsp;
+        waitForAvailabilityWindow = <span class="fstat-no" title="function not covered" >function(representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                deferred = Q.defer(),
+                range,
+                waitingTime,
+                getRange = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >                    range = self.timelineConverter.calcSegmentAvailabilityRange(representation, isDynamic);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    if (range.end &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                        deferred.resolve(range);</span>
+                    } else {
+                        // range.end represents a time gap between the current wall-clock time and the availability time of the first segment.
+                        // A negative value means that no segments are available yet, we should wait until segments become available
+<span class="cstat-no" title="statement not covered" >                        waitingTime = Math.abs(range.end) * 1000;</span>
+<span class="cstat-no" title="statement not covered" >                        setTimeout(getRange, waitingTime);</span>
+                    }
+                };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            getRange();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        },
+&nbsp;
+        getTimeBasedSegment = <span class="fstat-no" title="function not covered" >function(representation, time, duration, fTimescale, url, range, index) {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                scaledTime = time / fTimescale,
+                scaledDuration = Math.min(duration / fTimescale, representation.adaptation.period.mpd.maxSegmentDuration),
+                presentationStartTime,
+                presentationEndTime,
+                seg;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            presentationStartTime = self.timelineConverter.calcPresentationTimeFromMediaTime(scaledTime, representation);</span>
+<span class="cstat-no" title="statement not covered" >            presentationEndTime = presentationStartTime + scaledDuration;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            seg = new Dash.vo.Segment();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            seg.representation = representation;</span>
+<span class="cstat-no" title="statement not covered" >            seg.duration = scaledDuration;</span>
+<span class="cstat-no" title="statement not covered" >            seg.mediaStartTime = scaledTime;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            seg.presentationStartTime = presentationStartTime;</span>
+&nbsp;
+            // For SegmentTimeline every segment is available at mpdLoadedTime
+<span class="cstat-no" title="statement not covered" >            seg.availabilityStartTime = representation.adaptation.period.mpd.manifest.mpdLoadedTime;</span>
+<span class="cstat-no" title="statement not covered" >            seg.availabilityEndTime = self.timelineConverter.calcAvailabilityEndTimeFromPresentationTime(presentationEndTime, representation.adaptation.period.mpd, isDynamic);</span>
+&nbsp;
+            // at this wall clock time, the video element currentTime should be seg.presentationStartTime
+<span class="cstat-no" title="statement not covered" >            seg.wallStartTime = self.timelineConverter.calcWallTimeForSegment(seg, isDynamic);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            seg.replacementTime = time;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            seg.replacementNumber = getNumberForSegment(seg, index);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            url = replaceTokenForTemplate(url, "Number", seg.replacementNumber);</span>
+<span class="cstat-no" title="statement not covered" >            url = replaceTokenForTemplate(url, "Time", seg.replacementTime);</span>
+<span class="cstat-no" title="statement not covered" >            seg.media = url;</span>
+<span class="cstat-no" title="statement not covered" >            seg.mediaRange = range;</span>
+<span class="cstat-no" title="statement not covered" >            seg.availabilityIdx = index;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return seg;</span>
+        },
+&nbsp;
+        getSegmentsFromList = <span class="fstat-no" title="function not covered" >function (representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                segments = [],
+                deferred = Q.defer(),
+                list = representation.adaptation.period.mpd.manifest.Period_asArray[representation.adaptation.period.index].
+                    AdaptationSet_asArray[representation.adaptation.index].Representation_asArray[representation.index].SegmentList,
+                len = list.SegmentURL_asArray.length,
+                i,
+                seg,
+                s,
+                range,
+                startIdx = 0,
+                endIdx = list.SegmentURL_asArray.length,
+                start;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            start = representation.startNumber;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            waitForAvailabilityWindow.call(self, representation).then(</span>
+<span class="fstat-no" title="function not covered" >                function(availabilityWindow) {</span>
+<span class="cstat-no" title="statement not covered" >                    if (!isDynamic) {</span>
+<span class="cstat-no" title="statement not covered" >                        range = decideSegmentListRangeForTemplate.call(self, representation);</span>
+<span class="cstat-no" title="statement not covered" >                        startIdx = range.start;</span>
+<span class="cstat-no" title="statement not covered" >                        endIdx = range.end;</span>
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    for (i = startIdx; i &lt; endIdx; i += 1) {</span>
+<span class="cstat-no" title="statement not covered" >                        s = list.SegmentURL_asArray[i];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        seg = getIndexBasedSegment.call(</span>
+                            self,
+                            representation,
+                            i);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        seg.replacementTime = (start + i - 1) * representation.segmentDuration;</span>
+<span class="cstat-no" title="statement not covered" >                        seg.media = s.media;</span>
+<span class="cstat-no" title="statement not covered" >                        seg.mediaRange = s.mediaRange;</span>
+<span class="cstat-no" title="statement not covered" >                        seg.index = s.index;</span>
+<span class="cstat-no" title="statement not covered" >                        seg.indexRange = s.indexRange;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        segments.push(seg);</span>
+<span class="cstat-no" title="statement not covered" >                        seg = null;</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    representation.segmentAvailabilityRange = availabilityWindow;</span>
+<span class="cstat-no" title="statement not covered" >                    representation.availableSegmentsNumber = len;</span>
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve(segments);</span>
+            });
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        },
+&nbsp;
+        getSegmentsFromSource = <span class="fstat-no" title="function not covered" >function (representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                baseURL = representation.adaptation.period.mpd.manifest.Period_asArray[representation.adaptation.period.index].
+                    AdaptationSet_asArray[representation.adaptation.index].Representation_asArray[representation.index].BaseURL,
+                deferred = Q.defer(),
+                segments = [],
+                count = 0,
+                range = null,
+                s,
+                i,
+                len,
+                seg;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (representation.indexRange) {</span>
+<span class="cstat-no" title="statement not covered" >                range = representation.indexRange;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            this.baseURLExt.loadSegments(baseURL, range).then(</span>
+<span class="fstat-no" title="function not covered" >                function(fragments) {</span>
+<span class="cstat-no" title="statement not covered" >                    for (i = 0, len = fragments.length; i &lt; len; i+=1) {</span>
+<span class="cstat-no" title="statement not covered" >                        s = fragments[i];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        seg = getTimeBasedSegment.call(</span>
+                            self,
+                            representation,
+                            s.startTime,
+                            s.duration,
+                            s.timescale,
+                            s.media,
+                            s.mediaRange,
+                            count);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        segments.push(seg);</span>
+<span class="cstat-no" title="statement not covered" >                        seg = null;</span>
+<span class="cstat-no" title="statement not covered" >                        count += 1;</span>
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    representation.segmentAvailabilityRange = {start: segments[0].presentationStartTime, end: segments[len - 1].presentationStartTime};</span>
+<span class="cstat-no" title="statement not covered" >                    representation.availableSegmentsNumber = len;</span>
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve(segments);</span>
+                }
+            );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        },
+&nbsp;
+        getSegments = <span class="fstat-no" title="function not covered" >function (representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var segmentPromise,</span>
+                deferred = Q.defer(),
+                self = this,
+                lastIdx;
+&nbsp;
+                // Already figure out the segments.
+<span class="cstat-no" title="statement not covered" >            if (!isSegmentListUpdateRequired.call(self, representation)) {</span>
+<span class="cstat-no" title="statement not covered" >                return Q.when(representation.segments);</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                if (representation.segmentInfoType === "SegmentTimeline") {</span>
+<span class="cstat-no" title="statement not covered" >                    segmentPromise = getSegmentsFromTimeline.call(self, representation);</span>
+                } else <span class="cstat-no" title="statement not covered" >if (representation.segmentInfoType === "SegmentTemplate") {</span>
+<span class="cstat-no" title="statement not covered" >                    segmentPromise = getSegmentsFromTemplate.call(self, representation);</span>
+                } else <span class="cstat-no" title="statement not covered" >if (representation.segmentInfoType === "SegmentList") {</span>
+<span class="cstat-no" title="statement not covered" >                    segmentPromise = getSegmentsFromList.call(self, representation);</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    segmentPromise = getSegmentsFromSource.call(self, representation);</span>
+                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                Q.when(segmentPromise).then(</span>
+<span class="fstat-no" title="function not covered" >                    function (segments) {</span>
+<span class="cstat-no" title="statement not covered" >                        representation.segments = segments;</span>
+<span class="cstat-no" title="statement not covered" >                        lastIdx = segments.length - 1;</span>
+<span class="cstat-no" title="statement not covered" >                        if (isDynamic &amp;&amp; isNaN(representation.adaptation.period.liveEdge)) {</span>
+<span class="cstat-no" title="statement not covered" >                            var metrics = self.metricsModel.getMetricsFor("stream"),</span>
+                                liveEdge = segments[lastIdx].presentationStartTime;
+                            // the last segment is supposed to be a live edge
+<span class="cstat-no" title="statement not covered" >                            representation.adaptation.period.liveEdge = liveEdge;</span>
+<span class="cstat-no" title="statement not covered" >                            self.metricsModel.updateManifestUpdateInfo(self.metricsExt.getCurrentManifestUpdate(metrics), {presentationStartTime: liveEdge});</span>
+                        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                        deferred.resolve(segments);</span>
+                    }
+                );
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        },
+&nbsp;
+        updateSegmentList = <span class="fstat-no" title="function not covered" >function(representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                deferred = Q.defer();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            representation.segments = null;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            getSegments.call(self, representation).then(</span>
+<span class="fstat-no" title="function not covered" >                function(segments) {</span>
+<span class="cstat-no" title="statement not covered" >                    representation.segments = segments;</span>
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve();</span>
+                }
+            );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        },
+&nbsp;
+        getIndexForSegments = <span class="fstat-no" title="function not covered" >function (time, representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var segments = representation.segments,</span>
+                segmentLastIdx = segments.length - 1,
+                idx = -1,
+                frag,
+                ft,
+                fd,
+                i,
+                self = this;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (segments &amp;&amp; segments.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                for (i = segmentLastIdx; i &gt;= 0; i--) {</span>
+<span class="cstat-no" title="statement not covered" >                    frag = segments[i];</span>
+<span class="cstat-no" title="statement not covered" >                    ft = frag.presentationStartTime;</span>
+<span class="cstat-no" title="statement not covered" >                    fd = frag.duration;</span>
+<span class="cstat-no" title="statement not covered" >                    if ((time + Dash.dependencies.DashHandler.EPSILON) &gt;= ft &amp;&amp;</span>
+                        (time - Dash.dependencies.DashHandler.EPSILON) &lt;= (ft + fd)) {
+<span class="cstat-no" title="statement not covered" >                        idx = frag.availabilityIdx;</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    } else <span class="cstat-no" title="statement not covered" >if (idx === -1 &amp;&amp; (time - Dash.dependencies.DashHandler.EPSILON) &gt; (ft + fd)) {</span>
+                        // time is past the end
+<span class="cstat-no" title="statement not covered" >                        idx  = isNaN(representation.segmentDuration) ? (frag.availabilityIdx + 1) : Math.floor((time - representation.adaptation.period.start) / representation.segmentDuration);</span>
+                    }
+                }
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (idx === -1) {</span>
+<span class="cstat-no" title="statement not covered" >                if (!isNaN(representation.segmentDuration)) {</span>
+<span class="cstat-no" title="statement not covered" >                    idx = Math.floor((time - representation.adaptation.period.start) / representation.segmentDuration);</span>
+                } else {
+<span class="cstat-no" title="statement not covered" >                    self.debug.log("Couldn't figure out a time!");</span>
+<span class="cstat-no" title="statement not covered" >                    self.debug.log("Time: " + time);</span>
+<span class="cstat-no" title="statement not covered" >                    self.debug.log(segments);</span>
+                }
+            }
+&nbsp;
+            // TODO : This is horrible.
+            // Temp fix for SegmentTimeline refreshes.
+            //if (idx === -1) {
+            //    idx = 0;
+            //}
+&nbsp;
+            /*
+            if (segments &amp;&amp; segments.length &gt; 0) {
+                idx = 0;
+                ft = segments[0].startTime / segments[0].timescale;
+                frag = null;
+&nbsp;
+                while (ft &lt;= time &amp;&amp; (idx + 1) &lt; segments.length) {
+                    frag = segments[idx];
+                    ft += frag.duration / frag.timescale;
+                    idx += 1;
+                }
+                idx -= 1;
+            }
+            */
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return Q.when(idx);</span>
+        },
+&nbsp;
+        getSegmentByIndex = <span class="fstat-no" title="function not covered" >function(index, representation) {</span>
+		// Xiaoqi
+		//var self = this;
+		//this.debug.log("XIAOQI: indexHandler.getSegmentByIndex");
+		// Xiaoqi
+<span class="cstat-no" title="statement not covered" >            if (!representation || !representation.segments) <span class="cstat-no" title="statement not covered" >return null;</span></span>
+		// Xiaoqi
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+		// Xiaoqi
+		ln = representation.segments.length,
+                seg,
+                i;
+&nbsp;
+		
+		// Xiaoqi
+<span class="cstat-no" title="statement not covered" >		console.log("XIAOQI: indexHandler.getSegmentByIndex: representation.segments.length="+ln);</span>
+		// Xiaoqi
+<span class="cstat-no" title="statement not covered" >            for (i = 0; i &lt; ln; i += 1) {</span>
+<span class="cstat-no" title="statement not covered" >                seg = representation.segments[i];</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (seg.availabilityIdx === index) {</span>
+<span class="cstat-no" title="statement not covered" >                    return seg;</span>
+                }
+            }
+<span class="cstat-no" title="statement not covered" >		console.log("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX");</span>
+<span class="cstat-no" title="statement not covered" >            return null;</span>
+        },
+&nbsp;
+        isSegmentListUpdateRequired = <span class="fstat-no" title="function not covered" >function(representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var updateRequired = false,</span>
+                segments = representation.segments,
+                upperIdx,
+                lowerIdx;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (!segments) {</span>
+<span class="cstat-no" title="statement not covered" >                updateRequired = true;</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                lowerIdx = segments[0].availabilityIdx;</span>
+<span class="cstat-no" title="statement not covered" >                upperIdx = segments[segments.length -1].availabilityIdx;</span>
+<span class="cstat-no" title="statement not covered" >                updateRequired = (index &lt; lowerIdx) || (index &gt; upperIdx);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return updateRequired;</span>
+        },
+&nbsp;
+        getRequestForSegment = <span class="fstat-no" title="function not covered" >function (segment) {</span>
+<span class="cstat-no" title="statement not covered" >            if (segment === null || segment === undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                return Q.when(null);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            var request = new MediaPlayer.vo.SegmentRequest(),</span>
+                representation = segment.representation,
+                bandwidth = representation.adaptation.period.mpd.manifest.Period_asArray[representation.adaptation.period.index].
+                    AdaptationSet_asArray[representation.adaptation.index].Representation_asArray[representation.index].bandwidth,
+                url;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            url = getRequestUrl(segment.media, representation);</span>
+<span class="cstat-no" title="statement not covered" >            url = replaceTokenForTemplate(url, "Number", segment.replacementNumber);</span>
+<span class="cstat-no" title="statement not covered" >            url = replaceTokenForTemplate(url, "Time", segment.replacementTime);</span>
+<span class="cstat-no" title="statement not covered" >            url = replaceTokenForTemplate(url, "Bandwidth", bandwidth);</span>
+<span class="cstat-no" title="statement not covered" >            url = replaceIDForTemplate(url, representation.id);</span>
+<span class="cstat-no" title="statement not covered" >            url = unescapeDollarsInTemplate(url);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            request.streamType = type;</span>
+<span class="cstat-no" title="statement not covered" >            request.type = "Media Segment";</span>
+<span class="cstat-no" title="statement not covered" >            request.url = url;</span>
+<span class="cstat-no" title="statement not covered" >            request.range = segment.mediaRange;</span>
+<span class="cstat-no" title="statement not covered" >            request.startTime = segment.presentationStartTime;</span>
+<span class="cstat-no" title="statement not covered" >            request.duration = segment.duration;</span>
+<span class="cstat-no" title="statement not covered" >            request.timescale = representation.timescale;</span>
+<span class="cstat-no" title="statement not covered" >            request.availabilityStartTime = segment.availabilityStartTime;</span>
+<span class="cstat-no" title="statement not covered" >            request.availabilityEndTime = segment.availabilityEndTime;</span>
+<span class="cstat-no" title="statement not covered" >            request.wallStartTime = segment.wallStartTime;</span>
+<span class="cstat-no" title="statement not covered" >            request.quality = representation.index;</span>
+<span class="cstat-no" title="statement not covered" >            request.index = segment.availabilityIdx;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return Q.when(request);</span>
+        },
+&nbsp;
+        getForTime = <span class="fstat-no" title="function not covered" >function (representation, time) {</span>
+<span class="cstat-no" title="statement not covered" >            var deferred,</span>
+                request,
+                segment,
+                self = this;
+	    // Xiaoqi
+<span class="cstat-no" title="statement not covered" >	    self.debug.log("XIAOQI: indexHandler: ENTERING getForTime");</span>
+	    // Xiaoqi
+<span class="cstat-no" title="statement not covered" >            if (!representation) {</span>
+<span class="cstat-no" title="statement not covered" >                return Q.reject("no represenation");</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            requestedTime = time;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            self.debug.log("Getting the request for time: " + time);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            deferred = Q.defer();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            getSegments.call(self, representation).then(</span>
+<span class="fstat-no" title="function not covered" >                function (/*segments*/) {</span>
+<span class="cstat-no" title="statement not covered" >                    var segmentsPromise;</span>
+&nbsp;
+                    //self.debug.log("Got segments.");
+                    //self.debug.log(segments);
+                    //self.debug.log("Got a list of segments, so dig deeper.");
+<span class="cstat-no" title="statement not covered" >                    segmentsPromise = getIndexForSegments.call(self, time, representation);</span>
+<span class="cstat-no" title="statement not covered" >                    return segmentsPromise;</span>
+                }
+            ).then(
+<span class="fstat-no" title="function not covered" >                function (newIndex) {</span>
+<span class="cstat-no" title="statement not covered" >                    self.debug.log("Index for time " + time + " is " + newIndex);</span>
+<span class="cstat-no" title="statement not covered" >                    index = newIndex;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    return isMediaFinished.call(self, representation);</span>
+                }
+            ).then(
+<span class="fstat-no" title="function not covered" >                function (finished) {</span>
+<span class="cstat-no" title="statement not covered" >                    var requestPromise = null;</span>
+			// Xiaoqi
+                    //self.debug.log("Stream finished? " + finished);
+<span class="cstat-no" title="statement not covered" >			self.debug.log("XIAOQI: indexHandler.getForTime: Stream finished? " + finished);</span>
+			// Xiaoqi
+<span class="cstat-no" title="statement not covered" >                    if (finished) {</span>
+<span class="cstat-no" title="statement not covered" >                        request = new MediaPlayer.vo.SegmentRequest();</span>
+<span class="cstat-no" title="statement not covered" >                        request.action = request.ACTION_COMPLETE;</span>
+<span class="cstat-no" title="statement not covered" >                        request.index = index;</span>
+<span class="cstat-no" title="statement not covered" >                        self.debug.log("Signal complete.");</span>
+<span class="cstat-no" title="statement not covered" >                        self.debug.log(request);</span>
+<span class="cstat-no" title="statement not covered" >                        deferred.resolve(request);</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        segment = getSegmentByIndex(index, representation);</span>
+			// Xiaoqi
+<span class="cstat-no" title="statement not covered" >			self.debug.log("XIAOQI: indexHandler.getForTime: index="+index+", representation="+representation+", segment="+segment);</span>
+			// Xiaoqi
+<span class="cstat-no" title="statement not covered" >                        requestPromise = getRequestForSegment.call(self, segment);</span>
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    return requestPromise;</span>
+                }
+            ).then(
+<span class="fstat-no" title="function not covered" >                function (request) {</span>
+                    //self.debug.log("Got a request.");
+                    //self.debug.log(request);
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve(request);</span>
+                }
+            );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        },
+&nbsp;
+        getNext = function (representation) {
+            var deferred,
+                request,
+                segment,
+                self = this;
+	    // Xiaoqi
+	    self.debug.log("XIAOQI: requestScheduler: ENTERING getNext");
+	    // Xiaoqi
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (!representation) {
+<span class="cstat-no" title="statement not covered" >                return Q.reject("no represenation");</span>
+            }
+&nbsp;
+            //self.debug.log("Getting the next request.");
+&nbsp;
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (index === -1) {
+                throw "You must call getSegmentRequestForTime first.";
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            requestedTime = null;</span>
+<span class="cstat-no" title="statement not covered" >            index += 1;</span>
+            //self.debug.log("New index: " + index);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            deferred = Q.defer();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            isMediaFinished.call(self, representation).then(</span>
+<span class="fstat-no" title="function not covered" >                function (finished) {</span>
+                    //self.debug.log("Stream finished? " + finished);
+<span class="cstat-no" title="statement not covered" >                    if (finished) {</span>
+<span class="cstat-no" title="statement not covered" >                        request = new MediaPlayer.vo.SegmentRequest();</span>
+<span class="cstat-no" title="statement not covered" >                        request.action = request.ACTION_COMPLETE;</span>
+<span class="cstat-no" title="statement not covered" >                        request.index = index;</span>
+<span class="cstat-no" title="statement not covered" >                        self.debug.log("Signal complete.");</span>
+                        //self.debug.log(request);
+<span class="cstat-no" title="statement not covered" >                        deferred.resolve(request);</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        getSegments.call(self, representation).then(</span>
+<span class="fstat-no" title="function not covered" >                            function (/*segments*/) {</span>
+<span class="cstat-no" title="statement not covered" >                                var segmentsPromise;</span>
+&nbsp;
+                                //self.debug.log("Got segments.");
+                                //self.debug.log(segments);
+<span class="cstat-no" title="statement not covered" >                                segment = getSegmentByIndex(index, representation);</span>
+<span class="cstat-no" title="statement not covered" >                                segmentsPromise = getRequestForSegment.call(self, segment);</span>
+<span class="cstat-no" title="statement not covered" >                                return segmentsPromise;</span>
+                            }
+                        ).then(
+<span class="fstat-no" title="function not covered" >                            function (request) {</span>
+                                //self.debug.log("Got a request.");
+                                //self.debug.log(request);
+<span class="cstat-no" title="statement not covered" >                                deferred.resolve(request);</span>
+                            }
+                        );
+                    }
+                }
+            );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        },
+&nbsp;
+        getSegmentCountForDuration = <span class="fstat-no" title="function not covered" >function (representation, requiredDuration, bufferedDuration) {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                remainingDuration = Math.max(requiredDuration - bufferedDuration, 0),
+                deferred = Q.defer(),
+                segmentDuration,
+                segmentCount = 0;
+	    //// Xiaoqi
+	    //self.debug.log("XIAOQI: ENTERING getSegCount remainingDuration= "+ remainingDuration);
+	    //self.debug.log("XIAOQI: ENTERING getSegCount bufferedDuration= "+ bufferedDuration);
+	    //self.debug.log("XIAOQI: ENTERING getSegCount requiredDuration= "+ requiredDuration);
+	    //// Xiaoqi
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (!representation) {</span>
+<span class="cstat-no" title="statement not covered" >                return Q.reject("no represenation");</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            getSegments.call(self, representation).then(</span>
+<span class="fstat-no" title="function not covered" >                function (segments) {</span>
+		    // Xiaoqi 
+		    //self.debug.log("XIAOQI: ENTERING getSegCount SUCCEED");
+		    // Xiaoqi
+<span class="cstat-no" title="statement not covered" >                    segmentDuration = segments[0].duration;</span>
+<span class="cstat-no" title="statement not covered" >                    segmentCount = Math.ceil(remainingDuration/segmentDuration);</span>
+		    // Xiaoqi 
+		    //self.debug.log("XIAOQI: ENTERING getSegCount segmentDuration= "+ segmentDuration + ", segmentCount= "+segmentCount);
+<span class="cstat-no" title="statement not covered" >		    segmentCount = 1;</span>
+		    // Xiaoqi
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve(segmentCount);</span>
+                },
+<span class="fstat-no" title="function not covered" >                function () {</span>
+		    // Xiaoqi 
+		    //self.debug.log("XIAOQI: ENTERING getSegCount FAILED");
+		    // Xiaoqi
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve(0);</span>
+                }
+            );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        },
+&nbsp;
+        getCurrentTime = <span class="fstat-no" title="function not covered" >function (representation) {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                time,
+                bufferedIndex,
+                deferred = Q.defer();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (!representation) {</span>
+<span class="cstat-no" title="statement not covered" >                return Q.reject("no represenation");</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            bufferedIndex = index;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            getSegments.call(self, representation).then(</span>
+<span class="fstat-no" title="function not covered" >                function (segments) {</span>
+<span class="cstat-no" title="statement not covered" >                    if (bufferedIndex &lt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                        time = self.timelineConverter.calcPresentationStartTime(representation.adaptation.period);</span>
+                    } else {
+<span class="cstat-no" title="statement not covered" >                        bufferedIndex = bufferedIndex &lt; segments[0].availabilityIdx ? segments[0].availabilityIdx : Math.min(segments[segments.length - 1].availabilityIdx, bufferedIndex);</span>
+<span class="cstat-no" title="statement not covered" >                        time = getSegmentByIndex(bufferedIndex, representation).presentationStartTime;</span>
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    deferred.resolve(time);</span>
+                },
+<span class="fstat-no" title="function not covered" >                function () {</span>
+<span class="cstat-no" title="statement not covered" >                    deferred.reject();</span>
+                }
+            );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        };
+&nbsp;
+    return {
+        debug: undefined,
+        baseURLExt: undefined,
+        metricsModel: undefined,
+        metricsExt: undefined,
+        manifestModel: undefined,
+        manifestExt:undefined,
+        errHandler: undefined,
+        timelineConverter: undefined,
+&nbsp;
+        getType: function () {
+            return type;
+        },
+&nbsp;
+        setType : function (value) {
+            type = value;
+        },
+&nbsp;
+        getIsDynamic: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >            return isDynamic;</span>
+        },
+        setIsDynamic: <span class="fstat-no" title="function not covered" >function (value) {</span>
+<span class="cstat-no" title="statement not covered" >            isDynamic = value;</span>
+        },
+&nbsp;
+	// Xiaoqi
+	getCurrentIndex: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >		return index;</span>
+	},
+	// Xiaoqi
+&nbsp;
+        getInitRequest: getInit,
+        getSegmentRequestForTime: getForTime,
+        getNextSegmentRequest: getNext,
+        getCurrentTime: getCurrentTime,
+        getSegmentCountForDuration: getSegmentCountForDuration,
+        updateSegmentList: updateSegmentList
+    };
+};
+&nbsp;
+Dash.dependencies.DashHandler.EPSILON = 0.003;
+&nbsp;
+Dash.dependencies.DashHandler.prototype = {
+    constructor: Dash.dependencies.DashHandler
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jan 17 2015 15:18:38 GMT-0500 (EST)</div>
+</div>
+
+<script src="../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

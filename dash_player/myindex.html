@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Dash.js Rocks haha</title>
+        <style>
+	        video {
+	           width: 640px;
+	           height: 360px;
+	        }
+	    </style>
+    </head>
+    <body>
+        <div>
+            <video id="videoPlayer" controls="true" autoplay="autoplay"></video>
+        </div>
+		<!-- <script src="dash.all.orig.min.js"></script>-->
+		<script src="dash.beauty.js"></script>
+        <script>
+            (function(){
+                //var url = "http://localhost:8080/xiaoqi.mpd";
+                //var url = "http://localhost:8000/Manifest-Envivo.mpd";
+                var url = "http://localhost:8000/Manifest.mpd";
+		//var url = "http://dash.edgesuite.net/envivio/dashpr/clear/Manifest.mpd"
+		var context = new Dash.di.DashContext();
+                var player = new MediaPlayer(context);
+                player.startup();
+                player.attachView(document.querySelector("#videoPlayer"));
+                player.attachSource(url);
+            })();
+        </script>
+    </body>
+</html>

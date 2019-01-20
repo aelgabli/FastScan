@@ -1,0 +1,1603 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for streaming/StreamController.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">streaming/StreamController.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">1.36% <small>(2 / 147)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 52)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 37)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">1.39% <small>(2 / 144)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../index.html">All files</a> &#187; <a href="index.html">streaming/</a> &#187; StreamController.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+ * The copyright in this software is being made available under the BSD License, included below. This software may be subject to other third party and contributor rights, including patent rights, and no such rights are granted under this license.
+ *
+ * Copyright (c) 2013, Digital Primates
+ * All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+ * •  Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+ * •  Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+ * •  Neither the name of the Digital Primates nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+ MediaPlayer.dependencies.StreamController = <span class="fstat-no" title="function not covered" >function () {</span>
+    "use strict";
+&nbsp;
+    /*
+     * StreamController aggregates all streams defined as Period sections in the manifest file
+     * and implements corresponding logic to switch between them.
+     */
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var streams = [],</span>
+        activeStream,
+        //TODO set correct value for threshold
+        STREAM_BUFFER_END_THRESHOLD = 6,
+        STREAM_END_THRESHOLD = 0.2,
+        autoPlay = true,
+        isPeriodSwitchingInProgress = false,
+        timeupdateListener,
+        seekingListener,
+        progressListener,
+        pauseListener,
+        playListener,
+&nbsp;
+        play = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >            activeStream.play();</span>
+        },
+&nbsp;
+        pause = <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >            activeStream.pause();</span>
+        },
+&nbsp;
+        seek = <span class="fstat-no" title="function not covered" >function (time) {</span>
+<span class="cstat-no" title="statement not covered" >            activeStream.seek(time);</span>
+        },
+&nbsp;
+        /*
+         * Replaces the currently displayed &lt;video&gt; with a new data and corresponding &lt;video&gt; element.
+         *
+         * @param fromVideoModel Currently used video data
+         * @param toVideoModel New video data to be displayed
+         *
+         * TODO - move method to appropriate place - VideoModelExtensions??
+         */
+        switchVideoModel = <span class="fstat-no" title="function not covered" >function (fromVideoModel, toVideoModel) {</span>
+<span class="cstat-no" title="statement not covered" >            var activeVideoElement = fromVideoModel.getElement(),</span>
+                newVideoElement = toVideoModel.getElement();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (!newVideoElement.parentNode) {</span>
+<span class="cstat-no" title="statement not covered" >                activeVideoElement.parentNode.insertBefore(newVideoElement, activeVideoElement);</span>
+            }
+&nbsp;
+            // We use width property to hide/show video element because when using display="none"/"block" playback
+            // sometimes stops after switching.
+<span class="cstat-no" title="statement not covered" >            activeVideoElement.style.width = "0px";</span>
+<span class="cstat-no" title="statement not covered" >            newVideoElement.style.width = "100%";</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            copyVideoProperties(activeVideoElement, newVideoElement);</span>
+<span class="cstat-no" title="statement not covered" >            detachVideoEvents.call(this, fromVideoModel);</span>
+<span class="cstat-no" title="statement not covered" >            attachVideoEvents.call(this, toVideoModel);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return Q.when(true);</span>
+        },
+&nbsp;
+        attachVideoEvents = <span class="fstat-no" title="function not covered" >function (videoModel) {</span>
+<span class="cstat-no" title="statement not covered" >            videoModel.listen("seeking", seekingListener);</span>
+<span class="cstat-no" title="statement not covered" >            videoModel.listen("progress", progressListener);</span>
+<span class="cstat-no" title="statement not covered" >            videoModel.listen("timeupdate", timeupdateListener);</span>
+<span class="cstat-no" title="statement not covered" >            videoModel.listen("pause", pauseListener);</span>
+<span class="cstat-no" title="statement not covered" >            videoModel.listen("play", playListener);</span>
+        },
+&nbsp;
+        detachVideoEvents = <span class="fstat-no" title="function not covered" >function (videoModel) {</span>
+<span class="cstat-no" title="statement not covered" >            videoModel.unlisten("seeking", seekingListener);</span>
+<span class="cstat-no" title="statement not covered" >            videoModel.unlisten("progress", progressListener);</span>
+<span class="cstat-no" title="statement not covered" >            videoModel.unlisten("timeupdate", timeupdateListener);</span>
+<span class="cstat-no" title="statement not covered" >            videoModel.unlisten("pause", pauseListener);</span>
+<span class="cstat-no" title="statement not covered" >            videoModel.unlisten("play", playListener);</span>
+        },
+&nbsp;
+        copyVideoProperties = <span class="fstat-no" title="function not covered" >function (fromVideoElement, toVideoElement) {</span>
+<span class="cstat-no" title="statement not covered" >            ["controls", "loop", "muted", "playbackRate", "volume"].forEach( <span class="fstat-no" title="function not covered" >function(prop) {</span></span>
+<span class="cstat-no" title="statement not covered" >                toVideoElement[prop] = fromVideoElement[prop];</span>
+            });
+        },
+&nbsp;
+        /*
+         * Called when more data is buffered.
+         * Used to determine the time current stream is almost buffered and we can start buffering of the next stream.
+         * TODO move to ???Extensions class
+         */
+        onProgress = <span class="fstat-no" title="function not covered" >function() {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            var ranges = activeStream.getVideoModel().getElement().buffered;</span>
+&nbsp;
+            // nothing is buffered
+<span class="cstat-no" title="statement not covered" >            if (!ranges.length) {</span>
+<span class="cstat-no" title="statement not covered" >                return;</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            var lastRange = ranges.length -1,</span>
+                bufferEndTime = ranges.end(lastRange),
+                remainingBufferDuration = activeStream.getStartTime() + activeStream.getDuration() - bufferEndTime;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (remainingBufferDuration &lt; STREAM_BUFFER_END_THRESHOLD) {</span>
+<span class="cstat-no" title="statement not covered" >                activeStream.getVideoModel().unlisten("progress", progressListener);</span>
+<span class="cstat-no" title="statement not covered" >                onStreamBufferingEnd();</span>
+            }
+        },
+&nbsp;
+        /*
+         * Called when current playback positon is changed.
+         * Used to determine the time current stream is finished and we should switch to the next stream.
+         * TODO move to ???Extensions class
+         */
+        onTimeupdate = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >            var streamEndTime  = activeStream.getStartTime() + activeStream.getDuration(),</span>
+                currentTime = activeStream.getVideoModel().getCurrentTime(),
+                self = this;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            self.metricsModel.addDroppedFrames("video", self.videoExt.getPlaybackQuality(activeStream.getVideoModel().getElement()));</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (!getNextStream()) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
+            // Sometimes after seeking timeUpdateHandler is called before seekingHandler and a new period starts
+            // from beginning instead of from a chosen position. So we do nothing if the player is in the seeking state
+<span class="cstat-no" title="statement not covered" >            if (activeStream.getVideoModel().getElement().seeking) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
+            // check if stream end is reached
+<span class="cstat-no" title="statement not covered" >            if (streamEndTime - currentTime &lt; STREAM_END_THRESHOLD) {</span>
+<span class="cstat-no" title="statement not covered" >                switchStream.call(this, activeStream, getNextStream());</span>
+            }
+        },
+&nbsp;
+        /*
+         * Called when Seeking event is occured.
+         * TODO move to ???Extensions class
+         */
+        onSeeking = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >            var seekingTime = activeStream.getVideoModel().getCurrentTime(),</span>
+                seekingStream = getStreamForTime(seekingTime);
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (seekingStream &amp;&amp; seekingStream !== activeStream) {</span>
+<span class="cstat-no" title="statement not covered" >                switchStream.call(this, activeStream, seekingStream, seekingTime);</span>
+            }
+        },
+&nbsp;
+        onPause = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >            this.manifestUpdater.stop();</span>
+        },
+&nbsp;
+        onPlay = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >            this.manifestUpdater.start();</span>
+        },
+&nbsp;
+        /*
+         * Handles the current stream buffering end moment to start the next stream buffering
+         */
+        onStreamBufferingEnd = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >            var nextStream = getNextStream();</span>
+<span class="cstat-no" title="statement not covered" >            if (nextStream) {</span>
+<span class="cstat-no" title="statement not covered" >                nextStream.seek(nextStream.getStartTime());</span>
+            }
+        },
+&nbsp;
+        getNextStream = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >            var nextIndex = activeStream.getPeriodIndex() + 1;</span>
+<span class="cstat-no" title="statement not covered" >            return (nextIndex &lt; streams.length) ? streams[nextIndex] : null;</span>
+        },
+&nbsp;
+        getStreamForTime = <span class="fstat-no" title="function not covered" >function(time) {</span>
+<span class="cstat-no" title="statement not covered" >            var duration = 0,</span>
+                stream = null,
+                ln = streams.length;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (ln &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                duration += streams[0].getStartTime();</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            for (var i = 0; i &lt; ln; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                stream = streams[i];</span>
+<span class="cstat-no" title="statement not covered" >                duration += stream.getDuration();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                if (time &lt; duration) {</span>
+<span class="cstat-no" title="statement not covered" >                    return stream;</span>
+                }
+            }
+        },
+&nbsp;
+        //  TODO move to ???Extensions class
+        createVideoModel = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >            var model = this.system.getObject("videoModel"),</span>
+                video = document.createElement("video");
+<span class="cstat-no" title="statement not covered" >            model.setElement(video);</span>
+<span class="cstat-no" title="statement not covered" >            return model;</span>
+        },
+&nbsp;
+        removeVideoElement = <span class="fstat-no" title="function not covered" >function(element) {</span>
+<span class="cstat-no" title="statement not covered" >            if (element.parentNode) {</span>
+<span class="cstat-no" title="statement not covered" >                element.parentNode.removeChild(element);</span>
+            }
+        },
+&nbsp;
+        switchStream = <span class="fstat-no" title="function not covered" >function(from, to, seekTo) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if(isPeriodSwitchingInProgress || !from || !to || from === to) <span class="cstat-no" title="statement not covered" >return;</span></span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            isPeriodSwitchingInProgress = true;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            from.pause();</span>
+<span class="cstat-no" title="statement not covered" >            activeStream = to;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            switchVideoModel.call(this, from.getVideoModel(), to.getVideoModel());</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (seekTo) {</span>
+<span class="cstat-no" title="statement not covered" >                seek(from.getVideoModel().getCurrentTime());</span>
+            } else {
+<span class="cstat-no" title="statement not covered" >                seek(to.getStartTime());</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            play();</span>
+<span class="cstat-no" title="statement not covered" >            from.resetEventController();</span>
+<span class="cstat-no" title="statement not covered" >            activeStream.startEventController();</span>
+<span class="cstat-no" title="statement not covered" >            isPeriodSwitchingInProgress = false;</span>
+        },
+&nbsp;
+        composeStreams = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this,</span>
+                manifest = self.manifestModel.getValue(),
+                metrics = self.metricsModel.getMetricsFor("stream"),
+                manifestUpdateInfo = self.metricsExt.getCurrentManifestUpdate(metrics),
+                periodInfo,
+                deferred = Q.defer(),
+                updatedStreams = [],
+                pLen,
+                sLen,
+                pIdx,
+                sIdx,
+                period,
+                stream;
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (!manifest) {</span>
+<span class="cstat-no" title="statement not covered" >                return Q.when(false);</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            self.manifestExt.getMpd(manifest).then(</span>
+<span class="fstat-no" title="function not covered" >                function(mpd) {</span>
+<span class="cstat-no" title="statement not covered" >                    if (activeStream) {</span>
+<span class="cstat-no" title="statement not covered" >                        periodInfo = activeStream.getPeriodInfo();</span>
+<span class="cstat-no" title="statement not covered" >                        mpd.isClientServerTimeSyncCompleted = periodInfo.mpd.isClientServerTimeSyncCompleted;</span>
+<span class="cstat-no" title="statement not covered" >                        mpd.clientServerTimeShift = periodInfo.mpd.clientServerTimeShift;</span>
+                    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                    self.manifestExt.getRegularPeriods(manifest, mpd).then(</span>
+<span class="fstat-no" title="function not covered" >                        function(periods) {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                            if (periods.length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >                                return deferred.reject("There are no regular periods");</span>
+                            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                            self.metricsModel.updateManifestUpdateInfo(manifestUpdateInfo, {currentTime: self.videoModel.getCurrentTime(),</span>
+                                buffered: self.videoModel.getElement().buffered, presentationStartTime: periods[0].start,
+                                clientTimeOffset: mpd.clientServerTimeShift});
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                            for (pIdx = 0, pLen = periods.length; pIdx &lt; pLen; pIdx += 1) {</span>
+<span class="cstat-no" title="statement not covered" >                                period = periods[pIdx];</span>
+<span class="cstat-no" title="statement not covered" >                                for (sIdx = 0, sLen = streams.length; sIdx &lt; sLen; sIdx += 1) {</span>
+                                    // If the stream already exists we just need to update the values we got from the updated manifest
+<span class="cstat-no" title="statement not covered" >                                    if (streams[sIdx].getId() === period.id) {</span>
+<span class="cstat-no" title="statement not covered" >                                        stream = streams[sIdx];</span>
+<span class="cstat-no" title="statement not covered" >                                        updatedStreams.push(stream.updateData(period));</span>
+                                    }
+                                }
+                                // If the Stream object does not exist we probably loaded the manifest the first time or it was
+                                // introduced in the updated manifest, so we need to create a new Stream and perform all the initialization operations
+<span class="cstat-no" title="statement not covered" >                                if (!stream) {</span>
+<span class="cstat-no" title="statement not covered" >                                    stream = self.system.getObject("stream");</span>
+<span class="cstat-no" title="statement not covered" >                                    stream.setVideoModel(pIdx === 0 ? self.videoModel : createVideoModel.call(self));</span>
+<span class="cstat-no" title="statement not covered" >                                    stream.initProtection();</span>
+<span class="cstat-no" title="statement not covered" >                                    stream.setAutoPlay(autoPlay);</span>
+<span class="cstat-no" title="statement not covered" >                                    stream.load(manifest, period);</span>
+<span class="cstat-no" title="statement not covered" >                                    streams.push(stream);</span>
+                                }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                                self.metricsModel.addManifestUpdatePeriodInfo(manifestUpdateInfo, period.id, period.index, period.start, period.duration);</span>
+<span class="cstat-no" title="statement not covered" >                                stream = null;</span>
+                            }
+&nbsp;
+                            // If the active stream has not been set up yet, let it be the first Stream in the list
+<span class="cstat-no" title="statement not covered" >                            if (!activeStream) {</span>
+<span class="cstat-no" title="statement not covered" >                                activeStream = streams[0];</span>
+<span class="cstat-no" title="statement not covered" >                                attachVideoEvents.call(self, activeStream.getVideoModel());</span>
+                            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                            Q.all(updatedStreams).then(</span>
+<span class="fstat-no" title="function not covered" >                                function() {</span>
+<span class="cstat-no" title="statement not covered" >                                    deferred.resolve();</span>
+                                }
+                            );
+                        }
+                    );
+                }
+            );
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            return deferred.promise;</span>
+        },
+&nbsp;
+        manifestHasUpdated = <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this;</span>
+<span class="cstat-no" title="statement not covered" >            composeStreams.call(self).then(</span>
+<span class="fstat-no" title="function not covered" >                function() {</span>
+<span class="cstat-no" title="statement not covered" >                    self.system.notify("streamsComposed");</span>
+                },
+<span class="fstat-no" title="function not covered" >                function(errMsg) {</span>
+<span class="cstat-no" title="statement not covered" >                    self.errHandler.manifestError(errMsg, "nostreamscomposed", self.manifestModel.getValue());</span>
+<span class="cstat-no" title="statement not covered" >                    self.reset();</span>
+                }
+            );
+        };
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        system: undefined,
+        videoModel: undefined,
+        manifestLoader: undefined,
+        manifestUpdater: undefined,
+        manifestModel: undefined,
+        mediaSourceExt: undefined,
+        sourceBufferExt: undefined,
+        bufferExt: undefined,
+        manifestExt: undefined,
+        fragmentController: undefined,
+        abrController: undefined,
+        fragmentExt: undefined,
+        capabilities: undefined,
+        debug: undefined,
+        metricsModel: undefined,
+        metricsExt: undefined,
+        videoExt: undefined,
+        errHandler: undefined,
+&nbsp;
+        setup: <span class="fstat-no" title="function not covered" >function() {</span>
+<span class="cstat-no" title="statement not covered" >            this.system.mapHandler("manifestUpdated", undefined, manifestHasUpdated.bind(this));</span>
+<span class="cstat-no" title="statement not covered" >            timeupdateListener = onTimeupdate.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >            progressListener = onProgress.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >            seekingListener = onSeeking.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >            pauseListener = onPause.bind(this);</span>
+<span class="cstat-no" title="statement not covered" >            playListener = onPlay.bind(this);</span>
+        },
+&nbsp;
+        getManifestExt: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >            return activeStream.getManifestExt();</span>
+        },
+&nbsp;
+        setAutoPlay: <span class="fstat-no" title="function not covered" >function (value) {</span>
+<span class="cstat-no" title="statement not covered" >            autoPlay = value;</span>
+        },
+&nbsp;
+        getAutoPlay: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >            return autoPlay;</span>
+        },
+&nbsp;
+        getVideoModel: <span class="fstat-no" title="function not covered" >function () {</span>
+<span class="cstat-no" title="statement not covered" >            return this.videoModel;</span>
+        },
+&nbsp;
+        setVideoModel: <span class="fstat-no" title="function not covered" >function (value) {</span>
+<span class="cstat-no" title="statement not covered" >            this.videoModel = value;</span>
+        },
+&nbsp;
+        load: <span class="fstat-no" title="function not covered" >function (url) {</span>
+<span class="cstat-no" title="statement not covered" >            var self = this;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            self.manifestLoader.load(url).then(</span>
+<span class="fstat-no" title="function not covered" >                function(manifest) {</span>
+<span class="cstat-no" title="statement not covered" >                    self.manifestModel.setValue(manifest);</span>
+<span class="cstat-no" title="statement not covered" >                    self.debug.log("Manifest has loaded.");</span>
+                    //self.debug.log(self.manifestModel.getValue());
+<span class="cstat-no" title="statement not covered" >                    self.manifestUpdater.start();</span>
+                },
+<span class="fstat-no" title="function not covered" >                function () {</span>
+<span class="cstat-no" title="statement not covered" >                    self.reset();</span>
+                }
+            );
+        },
+&nbsp;
+        reset: <span class="fstat-no" title="function not covered" >function () {</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            if (!!activeStream) {</span>
+<span class="cstat-no" title="statement not covered" >                detachVideoEvents.call(this, activeStream.getVideoModel());</span>
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            for (var i = 0, ln = streams.length; i &lt; ln; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                var stream = streams[i];</span>
+<span class="cstat-no" title="statement not covered" >                stream.reset();</span>
+                // we should not remove the video element for the active stream since it is the element users see at the page
+<span class="cstat-no" title="statement not covered" >                if (stream !== activeStream) {</span>
+<span class="cstat-no" title="statement not covered" >                    removeVideoElement(stream.getVideoModel().getElement());</span>
+                }
+            }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >            streams = [];</span>
+<span class="cstat-no" title="statement not covered" >            this.manifestUpdater.stop();</span>
+<span class="cstat-no" title="statement not covered" >            this.manifestModel.setValue(null);</span>
+<span class="cstat-no" title="statement not covered" >            this.metricsModel.clearAllCurrentMetrics();</span>
+<span class="cstat-no" title="statement not covered" >            isPeriodSwitchingInProgress = false;</span>
+<span class="cstat-no" title="statement not covered" >            activeStream = null;</span>
+        },
+&nbsp;
+        play: play,
+        seek: seek,
+        pause: pause
+    };
+};
+&nbsp;
+MediaPlayer.dependencies.StreamController.prototype = {
+    constructor: MediaPlayer.dependencies.StreamController
+};
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Sat Jan 17 2015 15:18:38 GMT-0500 (EST)</div>
+</div>
+
+<script src="../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>
